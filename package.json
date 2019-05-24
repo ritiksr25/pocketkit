@@ -1,0 +1,26 @@
+{
+  "name": "pocketkit",
+  "version": "1.0.0",
+  "description": "A multiutility application that allows users to view movies, news, upcoming and ongoing contests, books and a content management system.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "pocketkit"
+  },
+  "author": "Ritik Srivastava and Mayank Shakya",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.17.0",
+    "mongoose": "^5.5.11",
+    "nodemon": "^1.19.0",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^2.0.0",
+    "path": "^0.12.7"
+  }
+}
