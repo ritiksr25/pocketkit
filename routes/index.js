@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 //import controllers
-const indexController = require('../controllers/index_controller');
+const { index, notauth } = require('../controllers/index_controller');
 
 //index route
-router.get('/', indexController.index);
-router.get('/', (req, res) => {
-    res.send('Hi! Working Properly!!');
-})
+router.get('/', index);
+//403 route
+router.get('/notauth', notauth);
+
 //export router
 module.exports = router;
