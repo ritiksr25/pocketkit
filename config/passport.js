@@ -14,14 +14,12 @@ module.exports = passport => {
         callbackURL: '/users/login/callback',
         proxy: true
     }, (accessToken, refreshToken, profile, done) => {
-        console.log(profile);
         const newUser = {
             googleID: profile.id,
             name: profile.displayName,
             email: profile.emails[0].value,
             img: profile.photos[0].value
         }
-        console.log(newUser);
         User.findOne({ googleID: newUser.googleID }).then(user => {
             if(user){
                 return done(null, user);

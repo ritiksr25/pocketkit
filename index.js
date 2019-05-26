@@ -41,7 +41,7 @@ app.use('/users', require('./routes/users'));
 //app.use('/news', require('./routes/news'));
 app.use('/books', require('./routes/books'));
 app.use('/contests', require('./routes/contests'));
-//app.use('/blogs', require('./routes/blogs'));
+app.use('/blogs', require('./routes/blogs'));
 
 //404 route
 app.get('*', (req, res) => {
