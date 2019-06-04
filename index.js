@@ -37,8 +37,8 @@ app.use((req, res, next) => {
 //routes
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
-//app.use('/movies', requie('./routes/movies'));
-//app.use('/news', require('./routes/news'));
+app.use('/movies', require('./routes/movies'));
+app.use('/news', require('./routes/news'));
 app.use('/books', require('./routes/books'));
 app.use('/contests', require('./routes/contests'));
 app.use('/blogs', require('./routes/blogs'));

@@ -1,5 +1,6 @@
-const request = require('request');
+const axios = require('axios');
 
+//load library model
 const Library = require('../models/Library');
 
 module.exports.index = (req, res) => {
@@ -9,15 +10,8 @@ module.exports.index = (req, res) => {
 module.exports.search = (req, res) => {
     var query = req.body.query;
     var url = `https://www.googleapis.com/books/v1/volumes?q=${query}`;
-
-    request(url, (err, response, body) => {
-        if(response.statusCode === 200){
-            var books = JSON.parse(body);
-            res.render('books/result', { books });
-        }
-        else{
-            res.render('books/result', { msg: response.statusCode });
-        }
+    axios.get(url).then(response => {
+        res.send(response.data.items);//pagination pending
     })
 }
 

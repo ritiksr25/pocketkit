@@ -10,9 +10,19 @@ const BlogSchema = mongoose.Schema({
         required: true
     },
     createdAt: { type: Date, default: Date.now },
-    likes: [String],
+    likes: [{
+        user: { 
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+        }
+    }],
     comments: [{
-        user: { type: String, required: true },
+        user: { 
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+        },
         name: { type: String, required: true },
         email: { type: String, required: true },
         img: { type: String, required: true },

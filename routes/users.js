@@ -4,7 +4,7 @@ const passport = require('passport');
 const router = express.Router();
 
 //load controller file
-const { login, logout } = require('../controllers/user_controller');
+const logout = require('../controllers/user_controller');
 
 //login route
 router.get('/login', passport.authenticate('google', { scope: ['profile', 'email'] }));

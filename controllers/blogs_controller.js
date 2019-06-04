@@ -82,12 +82,12 @@ module.exports.delete = (req, res) => {
 
 module.exports.like = (req, res) => {
     Blog.findOne({ id: req.params.id }).then(blog => {
-        blog.likes.forEach(user => {
-            if(user === req.user.id){
+        blog.likes.forEach(like => {
+            if(like.user.toString() === req.user.id){
                 res.render('blogs/view', { blog });
             }
         });
-        blog.likes.unshift(req.user.id);
+        blog.likes.unshift({ user: req.user.id });
         blog.save().then(blog => {
             res.render('blogs/view', { blog });
         }).catch(err => console.log(err))
@@ -96,7 +96,7 @@ module.exports.like = (req, res) => {
 
 module.exports.unlike = (req, res) => {
     Blog.findOne({ id: req.params.id }).then(blog => {
-        const removeIndex = blog.likes.map(item => item.id).indexOf(req.user.id);
+        const removeIndex = blog.likes.map(item => item.user.toString()).indexOf(req.user.id);
         blog.likes.splice(removeIndex, 1);
         blog.save().then(blog => {
             res.render('blogs/view', { blog });
@@ -124,12 +124,12 @@ module.exports.comment = (req, res) => {
     }).catch(err => onmouseleave.log(err))
 }
 
-module.exports.uncomment = (req, res) => {
-    Blog.findOne({ id: req.params.id }).then(blog => {
-        const removeIndex = blog.comments.map(item => item.user).indexOf(req.user.id);
-        blog.likes.splice(removeIndex, 1);
-        blog.save().then(blog => {
-            res.render('blogs/view', { blog });
-        }).catch(err => console.log(err))
-    }).catch(err => console.log(err))
-}
+// module.exports.uncomment = (req, res) => {
+//     Blog.findOne({ id: req.params.id }).then(blog => {
+//         const removeIndex = blog.comments.map(item => item.user.toString).indexOf(req.user.id);
+//         blog.likes.splice(removeIndex, 1);
+//         blog.save().then(blog => {
+//             res.render('blogs/view', { blog });
+//         }).catch(err => console.log(err))
+//     }).catch(err => console.log(err))
+// }

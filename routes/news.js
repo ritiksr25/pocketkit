@@ -7,9 +7,9 @@ const { newstories, beststories, topstories } = require('../controllers/news_con
 //news home new stories
 router.get('/new', newstories);
 //best stories
-//router.get('/best', beststories);
+router.get('/best', beststories);
 //top stories
-//router.get('/top', topstories);
+router.get('/top', topstories);
 
 //export router
 module.exports = router;

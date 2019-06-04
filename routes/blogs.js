@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 //load controller
-const blogController = require('../controllers/blogs_controller');
+const blogController = require('../controllers/blogs_controller')
 
 //index route -view all user blogs
 router.get('/', blogController.index);
@@ -24,7 +24,7 @@ router.get('/like/:id', blogController.like);
 router.get('/unlike/:id', blogController.unlike);
 //comments
 router.post('/comment/:id', blogController.comment);
-router.get('/uncomment/:id', blogController.uncomment);
+//router.get('/uncomment/:id', blogController.uncomment);
 
 //export router
 module.exports = router;
