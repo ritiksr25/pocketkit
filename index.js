@@ -34,6 +34,11 @@ app.use((req, res, next) => {
     next();
 })
 
+//models
+const User = require('./models/User');
+const Blog = require('./models/Blog');
+const Library = require('./models/Library');
+
 //routes
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
@@ -44,9 +49,7 @@ app.use('/contests', require('./routes/contests'));
 app.use('/blogs', require('./routes/blogs'));
 
 //404 route
-app.get('*', (req, res) => {
-    res.render('index/notfound');
-});
+app.get('*', require('./controllers/index_controller').notfound);
 
 //setting up server
 const PORT = process.env.PORT;

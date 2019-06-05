@@ -1,9 +1,5 @@
-//load model
-const Blog = require('../models/Blog');
-const User = require('../models/User');
-
 module.exports.index = (req, res) => {
-    Blog.find({ status: 'published' }).sort({ createdAt: desc }).then(blogs => {
+    Blog.find({ published: true }).sort({ createdAt: desc }).then(blogs => {
         res.render('blogs/index',{ blogs });
     }).catch(err => console.log(err))
 }
@@ -21,7 +17,7 @@ module.exports.myBlogs = (req, res) => {
 }
 
 module.exports.userBlogs = (req, res) => {
-    Blog.find({ user: req.params.id, status: 'published' }).sort({ createdAt: desc }).then(blogs => {
+    Blog.find({ user: req.params.id, published: true }).sort({ createdAt: desc }).then(blogs => {
         res.render('blogs/index', { blogs });
     }).catch(err => console.log(err))
 }
@@ -31,11 +27,11 @@ module.exports.add = (req, res) => {
 }
 
 module.exports.addProcess = (req, res) => {
-    const { title, description, status } = req.body;
+    const { title, description, published } = req.body;
     if(!title || !description || !status){
         res.redirect('/blogs/add');
     }
-    Blog.create({ title, description, status }).then(blog => {
+    Blog.create({ title, description, status, published }).then(blog => {
         res.render('blogs/view', { blog });
     }).catch(err => console.log(err))
 }
@@ -52,14 +48,14 @@ module.exports.update = (req, res) => {
 }
 
 module.exports.updateProcess = (req, res) => {
-    const { title, description, status } = req.body;
+    const { title, description, status, published } = req.body;
     if(!title || !description || !status){
         res.redirect('/back');
     }
     Blog.findOne({ id: req.params.id }).then(blog => {
         blog.title = title;
         blog.description = description;
-        blog.status = status;
+        blog.published = published;
         blog.user = req.user.id;
         blog.save().then(blog => {
             res.render('blogs/view', { blog });

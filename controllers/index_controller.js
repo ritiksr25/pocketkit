@@ -5,3 +5,7 @@ module.exports.index = (req, res) => {
 module.exports.notauth = (req, res) => {
     res.render('index/notauth');
 }
+
+module.exports.notfound = (req, res) => {
+    res.render('index/notfound');
+}

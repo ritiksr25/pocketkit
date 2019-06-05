@@ -29,7 +29,7 @@ const BlogSchema = mongoose.Schema({
         comment: { type: String, required: true },
         date: { type: Date, default: Date.now }
     }],
-    status: { type: String, required: true },
+    published: { type: Boolean, default: true }
 })
 
 //export model

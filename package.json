@@ -1,7 +1,7 @@
 {
   "name": "pocketkit",
   "version": "1.0.0",
-  "description": "A multiutility application that allows users to view movies, news, upcoming and ongoing contests, books and also a post sharing platform where users can post,view others post and like an comment as well.",
+  "description": "A multiutility application that allows users to view movies, news, upcoming and ongoing contests, books and also a post sharing platform where users can post,view others post and like and comment as well.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -24,7 +24,6 @@
     "nodemon": "^1.19.0",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^2.0.0",
-    "path": "^0.12.7",
-    "request": "^2.88.0"
+    "path": "^0.12.7"
   }
 }

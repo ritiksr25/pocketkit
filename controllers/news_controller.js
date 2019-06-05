@@ -3,21 +3,23 @@ const axios = require('axios');
 const urlpre = 'https://hacker-news.firebaseio.com/v0/';
 const urlpost = '.json?print=pretty';
 
+async function getEachStory(response){
+    let stories = [];
+    await response.forEach(async item => {
+        let story = await axios.get(`${urlpre}item/${item}${urlpost}`)
+            stories.push(story.data);
+            // console.log(story.data);
+    });
+    console.log(stories);
+    
+}
+
 module.exports.newstories = async (req, res) => {
-    await axios.get(`${urlpre}newstories${urlpost}`).then(response => {
-        response.data.length = 10;
-        let stories = [];
-        console.log(response.data);
-        response.data.forEach(item => {
-            axios.get(`${urlpre}item/${item}${urlpost}`).then(story => {
-                stories.push(story.data);
-                console.log(story.data);
-            }).catch(err => console.log(err));
-        });
-        //res.send(stories);
-        //res.render('news/new', { stories });
-    }).catch(err => console.log(err));
-    console.log(stories); //this line should be executed after foreach loop but is being executed before it.
+    let response = await axios.get(`${urlpre}newstories${urlpost}`);
+    response.data.length = 10;
+    console.log(response.data);
+    let stories = await getEachStory(response.data);
+     //this line should be executed after foreach loop but is being executed before it.
 }
 
 module.exports.topstories = (req, res) => {

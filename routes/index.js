@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-//import controllers
+//load controllers
 const { index, notauth } = require('../controllers/index_controller');
 
 //index route
