@@ -1,24 +1,22 @@
-const axios = require('axios');
-require('dotenv').config();
+const axios =require('axios');
 
-const apikey = process.env.OMDB_API_KEY;
+const urlpre = process.env.MOVIES_API_URL_PRE;
+const urlpost = process.env.MOVIES_API_URL_POST;
 
 module.exports.index = (req, res) => {
     res.render('movies/index');
 }
 
-module.exports.search = (req, res) => {
+module.exports.search = async (req, res) => {
     let query = req.body.query;
-    var url = `http://www.omdbapi.com/?s=${query}&apikey=${apikey}`;
-    axios.get(url).then(response => {
-        res.render('movies/results', { movies: response.data.Search });
-    }).catch(err => console.log(err))
+    var url = `${urlpre}s=${query}${urlpost}`;
+    let response = await axios.get(url);
+    res.render('movies/results', { movies: response.data.Search });
 }
 
-module.exports.view = (req, res) => {
+module.exports.view = async (req, res) => {
     let id = req.params.id;
-    var url = `http://www.omdbapi.com/?i=${id}&plot=full&apikey=${apikey}`;
-    axios.get(url).then(response => {
-        res.render('movies/view', { movie: response.data });
-    }).catch(err => console.log(err)) 
+    var url = `${urlpre}i=${id}&plot=full${urlpost}`;
+    let response = await axios.get(url);
+    res.render('movies/view', { movie: response.data });
 }

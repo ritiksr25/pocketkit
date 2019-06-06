@@ -10,6 +10,7 @@ router.get('/', blogController.index);
 router.get('/id/:id', blogController.single);
 //user blogs
 router.get('/myBlogs', blogController.myBlogs);
+//router.get('/user/:id', blogController.userBlogs);
 //add blog
 router.get('/add', blogController.add);
 router.post('/add', blogController.addProcess);

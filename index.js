@@ -54,6 +54,6 @@ app.get('*', require('./controllers/index_controller').notfound);
 //setting up server
 const PORT = process.env.PORT;
 app.listen(PORT, (err) => {
-    if(err) console.log('Error in running Server.');
+    if (err) console.log('Error in running Server.');
     else console.log(`Server is up and running on Port ${PORT}`);
 });

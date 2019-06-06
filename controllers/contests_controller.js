@@ -1,15 +1,13 @@
-const axios = require('axios');
+const axios =require('axios');
 
-const url = 'https://contesttrackerapi.herokuapp.com';
+const url = process.env.CONTESTS_API_URL;
 
-module.exports.ongoing = (req, res) => {
-    axios.get(url).then(response => {
-			res.render('contests/ongoing', { ongoing: response.data.result.ongoing });
-		}).catch(err => console.log(err));
-}
+module.exports.ongoing = async (req, res) => {
+    let response = await axios.get(url);
+    res.render('contests/ongoing', { ongoing: response.data.result.ongoing });
+}	
 
-module.exports.upcoming = (req, res) => {
-    axios.get(url).then(response => {
-            res.render('contests/upcoming', { upcoming: response.data.result.upcoming });
-        }).catch(err =>console.log(err));
+module.exports.upcoming = async (req, res) => {
+    let response = await axios.get(url);
+    res.render('contests/upcoming', { upcoming: response.data.result.upcoming });
 }

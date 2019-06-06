@@ -1,5 +1,6 @@
 const axios = require('axios');
 
+const urlpart = process.env.BOOKS_API_URL_PART;
 module.exports.index = (req, res) => {
     res.render('books/index');
 }
@@ -10,20 +11,19 @@ module.exports.search = async (req, res) => {
     var lower = perPage*page-perPage;
     var upper = perPage*page;
     var query = req.body.query;
-    var url = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=40`;
+    var url = `${urlpart}q=${query}&maxResults=40`;
     let response = await axios.get(url);
     var books = response.data.items.slice(lower, upper);
     res.render('books/result', { books });
 }
 
-module.exports.library = (req, res) => {
-    Library.find({ user: req.user.id }).then(books => {
+module.exports.library = async (req, res) => {
+    let books = await Library.find({ user: req.user.id })
         res.render('books/library', { books });
-    })
 }
 
 module.exports.add = async (req, res) => {
-    var url = `https://www.googleapis.com/books/v1/volumes/${req.params.id}`;
+    var url = `${urlpart}/${req.params.id}`;
     let response = await axios.get(url);
     const newBook = {
         user: req.user.id,
@@ -34,20 +34,17 @@ module.exports.add = async (req, res) => {
         publisher:response.data.volumeInfo.publisher,
         thumbnail:response.data.volumeInfo.imageLinks.thumbnail
     }
-    Library.findOne({ user: req.user.id, bookid }).then(book => {
+    let book = await Library.findOne({ user: req.user.id, bookid });
         if(book){
             res.redirect('/back');
         }
         else{
-            Library.create(newBook).then(book => {
-                res.redirect('/books/library');
-            }).catch(err => console.log(err))
+            let book = await Library.create(newBook);
+            res.redirect('/books/library');
         }
-    }).catch(err => console.log(err))
 }
 
-module.exports.delete = (req, res) => {
-    Library.deleteOne({ user: req.user.id, id: bookid }).then(book => {
-        res.redirect('/books/library');
-    })
+module.exports.delete = async (req, res) => {
+    let book = await Library.deleteOne({ user: req.user.id, id: bookid })
+    res.redirect('/books/library');
 }
