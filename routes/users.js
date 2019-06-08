@@ -11,7 +11,7 @@ router.get('/login', passport.authenticate('google', { scope: ['profile', 'email
 
 //login callback route
 router.get('/login/callback', passport.authenticate('google', { failureRedirect: '/notauth' }),
-login)
+    login)
 
 //logout route
 router.get('/logout', logout);
