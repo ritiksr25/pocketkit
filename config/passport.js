@@ -21,10 +21,10 @@ module.exports = passport => {
             img: profile.photos[0].value
         }
         User.findOne({ googleID: newUser.googleID }).then(user => {
-            if(user){
+            if (user) {
                 return done(null, user);
             }
-            else{
+            else {
                 User.create(newUser).then(user => {
                     return done(null, user);
                 })

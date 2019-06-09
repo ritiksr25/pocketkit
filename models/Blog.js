@@ -9,6 +9,7 @@ const BlogSchema = mongoose.Schema({
         ref: 'User',
         required: true
     },
+    author: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
     likes: [{
         user: {

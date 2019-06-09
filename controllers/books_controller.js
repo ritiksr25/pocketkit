@@ -19,11 +19,10 @@ module.exports.search = async (req, res) => {
     else {
         res.render('books/results', { msg: 'No results found!!' });
     }
-
 }
 
 module.exports.library = async (req, res) => {
-    let books = await Library.find({ user: req.user.id })
+    let books = await Library.find({ user: req.user.id });
     res.render('books/library', { books });
 }
 
@@ -31,11 +30,12 @@ module.exports.add = async (req, res) => {
     let response = await axios.get(`${urlpart.split('?')[0]}/${req.params.id}`);
     const newBook = {
         user: req.user.id,
-        bookid: response.data.id,
-        link: response.data.selfLink,
+        subtitle: response.data.volumeInfo.subtitle,
+        link: response.data.accessInfo.webReaderLink,
         title: response.data.volumeInfo.title,
         authors: response.data.volumeInfo.authors,
         publisher: response.data.volumeInfo.publisher,
+        publishedDate: response.data.volumeInfo.publishedDate,
         thumbnail: response.data.volumeInfo.imageLinks.thumbnail
     }
     let book = await Library.findOne({ user: req.user.id, bookid });
@@ -49,6 +49,6 @@ module.exports.add = async (req, res) => {
 }
 
 module.exports.delete = async (req, res) => {
-    let book = await Library.deleteOne({ user: req.user.id, id: bookid })
+    let book = await Library.deleteOne({ user: req.user.id, id: bookid });
     res.redirect('/books/library');
 }

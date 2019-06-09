@@ -1,5 +1,5 @@
 module.exports.index = async (req, res) => {
-    let blogs = await Blog.find({ published: true }).sort({ createdAt: desc });
+    let blogs = await Blog.find({ published: true }).sort({ createdAt: 'desc' });
     res.render('blogs/index', { blogs });
 }
 
@@ -24,10 +24,10 @@ module.exports.add = (req, res) => {
 
 module.exports.addProcess = async (req, res) => {
     const { title, description, published } = req.body;
-    if (!title || !description || !status) {
-        res.redirect('/blogs/add');
+    if (!title || !description || !published) {
+        res.render('blogs/add', { msg: 'All fields are mandatory!!' });
     }
-    let blog = await Blog.create({ title, description, status, published });
+    let blog = await Blog.create({ title, description, published, user: req.user.id, author: req.user.name });
     res.render('blogs/view', { blog });
 }
 
@@ -42,17 +42,23 @@ module.exports.update = async (req, res) => {
 }
 
 module.exports.updateProcess = async (req, res) => {
-    const { title, description, status, published } = req.body;
-    if (!title || !description || !status) {
+    const { title, description, published } = req.body;
+    if (!title || !description || !published) {
+        res.render('blogs/add', { msg: 'All fields are mandatory!!' });
+    }
+    let blog = await Blog.findOne({ id: req.params.id, user: req.user.id });
+    if (blog) {
+        blog.title = title;
+        blog.description = description;
+        blog.published = published;
+        blog.user = req.user.id;
+        blog.author = req.user.name;
+        let blog1 = await blog.save();
+        res.render('blogs/view', { blog: blog1 });
+    }
+    else {
         res.redirect('/back');
     }
-    let blog = await Blog.findOne({ id: req.params.id });
-    blog.title = title;
-    blog.description = description;
-    blog.published = published;
-    blog.user = req.user.id;
-    let blog1 = await blog.save();
-    res.render('blogs/view', { blog: blog1 });
 }
 
 module.exports.delete = async (req, res) => {
@@ -74,7 +80,7 @@ module.exports.like = async (req, res) => {
         }
     });
     blog.likes.unshift({ user: req.user.id });
-    let blog1 = await blog.save()
+    let blog1 = await blog.save();
     res.render('blogs/view', { blog: blog1 });
 }
 
@@ -91,7 +97,7 @@ module.exports.comment = async (req, res) => {
     if (!comment) {
         res.redirect('/back');
     }
-    let blog = await Blog.findOne({ id: req.params.id })
+    let blog = await Blog.findOne({ id: req.params.id });
     const newComment = {
         comment: comment,
         user: req.user.id,

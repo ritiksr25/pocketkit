@@ -1,5 +1,5 @@
 module.exports.index = (req, res) => {
-    res.send('Hi! Working Properly!! User: ' + req.user.name || '.');
+    res.render('index/index');
 }
 
 module.exports.notauth = (req, res) => {

@@ -9,8 +9,8 @@ module.exports.index = (req, res) => {
 module.exports.search = async (req, res) => {
     let query = req.body.query;
     let response = await axios.get(`${urlPart}s=${query}`);
-    if(response.data.Search.length !== 0){
-        res.render('movies/results', { movies: response.data.Search });    
+    if (response.data.Search.length !== 0) {
+        res.render('movies/results', { movies: response.data.Search });
     }
     res.render('movies/results', { msg: 'No results found!!' });
 }

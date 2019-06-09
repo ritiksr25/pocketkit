@@ -1,8 +1,5 @@
-//import packages
 const express = require('express');
 const bodyParser = require('body-parser');
-const ejs = require('ejs');
-const mongoose = require('mongoose');
 const path = require('path');
 const passport = require('passport');
 const session = require('express-session');

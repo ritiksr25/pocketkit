@@ -1,30 +1,32 @@
 const express = require('express');
 const router = express.Router();
 
+//load authcheck
+const isLoggedIn = require('../config/authcheck');
 //load controller
 const blogController = require('../controllers/blogs_controller')
 
 //index route -view all user blogs
-router.get('/', blogController.index);
+router.get('/', isLoggedIn, blogController.index);
 //view single blog
-router.get('/id/:id', blogController.single);
+router.get('/id/:id', isLoggedIn, blogController.single);
 //user blogs
-router.get('/myBlogs', blogController.myBlogs);
-//router.get('/user/:id', blogController.userBlogs);
+router.get('/myBlogs', isLoggedIn, blogController.myBlogs);
+router.get('/user/:id', blogController.userBlogs);
 //add blog
-router.get('/add', blogController.add);
-router.post('/add', blogController.addProcess);
+router.get('/add', isLoggedIn, blogController.add);
+router.post('/add', isLoggedIn, blogController.addProcess);
 //update blog
-router.get('/update/:id', blogController.update);
-router.post('/update/:id', blogController.updateProcess);
+router.get('/update/:id', isLoggedIn, blogController.update);
+router.post('/update/:id', isLoggedIn, blogController.updateProcess);
 //delete blog
-router.get('/delete/:id', blogController.delete);
+router.get('/delete/:id', isLoggedIn, blogController.delete);
 //like and unlike blog route
-router.get('/like/:id', blogController.like);
-router.get('/unlike/:id', blogController.unlike);
+router.post('/like/:id', isLoggedIn, blogController.like);
+router.post('/unlike/:id', isLoggedIn, blogController.unlike);
 //comments
-router.post('/comment/:id', blogController.comment);
-//router.get('/uncomment/:id', blogController.uncomment);
+router.post('/comment/:id', isLoggedIn, blogController.comment);
+router.post('/uncomment/:id', blogController.uncomment);
 
 //export router
 module.exports = router;
