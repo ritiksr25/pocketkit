@@ -4,16 +4,22 @@ const router = express.Router();
 //load authcheck
 const isLoggedIn = require('../config/authcheck');
 //load controllers
-const booksController = require('../controllers/books_controller');
+const {
+    index,
+    search,
+    library,
+    add,
+    Delete
+} = require('../controllers/books_controller');
 
 //books index route
-router.get('/', isLoggedIn, booksController.index);
+router.get('/', isLoggedIn, index);
 //search results
-router.post('/', isLoggedIn, booksController.search);
+router.post('/', isLoggedIn, search);
 //user library
-router.get('/library', isLoggedIn, booksController.library);
-router.post('/library/add/:id', isLoggedIn, booksController.add);
-router.get('/library/delete/:id', isLoggedIn, booksController.delete);
+router.get('/library', isLoggedIn, library);
+router.post('/library/add/:id', isLoggedIn, add);
+router.get('/library/delete/:id', isLoggedIn, Delete);
 
 //export router
 module.exports = router;

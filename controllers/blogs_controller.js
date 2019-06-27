@@ -1,21 +1,41 @@
 module.exports.index = async (req, res) => {
-    let blogs = await Blog.find({ published: true }).sort({ createdAt: 'desc' });
-    res.render('blogs/index', { blogs });
+    try {
+        let blogs = await Blog.find({ published: true }).sort({ createdAt: 'desc' }).populate('user');
+        res.render('blogs/index', { blogs });
+    }
+    catch (err) {
+        console.log(err);
+    }
 }
 
 module.exports.single = async (req, res) => {
-    let blog = await Blog.findOne({ _id: req.params.id });
-    res.render('blogs/view', { blog });
+    try {
+        let blog = await Blog.findById(req.params.id).populate('user');
+        res.render('blogs/view', { blog });
+    }
+    catch (err) {
+        console.log(err);
+    }
 }
 
 module.exports.myBlogs = async (req, res) => {
-    let blogs = await Blog.find({ user: req.user.id }).sort({ createdAt: desc });
-    res.render('blogs/index', { blogs });
+    try {
+        let blogs = await Blog.find({ user: req.user.id }).sort({ createdAt: 'desc' }).populate('user');
+        res.render('blogs/index', { blogs });
+    }
+    catch (err) {
+        console.log(err);
+    }
 }
 
 module.exports.userBlogs = async (req, res) => {
-    let blogs = await Blog.find({ user: req.params.id, published: true }).sort({ createdAt: desc });
-    res.render('blogs/index', { blogs });
+    try {
+        let blogs = await Blog.find({ user: req.params.id, published: true }).sort({ createdAt: desc }).populate('user');
+        res.render('blogs/index', { blogs });
+    }
+    catch (err) {
+        console.log(err);
+    }
 }
 
 module.exports.add = (req, res) => {
@@ -24,20 +44,38 @@ module.exports.add = (req, res) => {
 
 module.exports.addProcess = async (req, res) => {
     const { title, description, published } = req.body;
-    if (!title || !description || !published) {
+    if (!title || !description) {
         res.render('blogs/add', { msg: 'All fields are mandatory!!' });
     }
-    let blog = await Blog.create({ title, description, published, user: req.user.id, author: req.user.name });
-    res.render('blogs/view', { blog });
+    else {
+        let newBlog = {
+            title,
+            description,
+            published,
+            user: req.user.id
+        }
+        try {
+            let blog = await Blog.create(newBlog);
+            res.render('blogs/view', { blog });
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
 }
 
 module.exports.update = async (req, res) => {
-    let blog = await Blog.findOne({ _id: req.params.id, user: req.user.id });
-    if (blog) {
-        res.render('blogs/update', { blog });
+    try {
+        let blog = await Blog.findById(req.params.id);
+        if (blog.user == req.user.id) {
+            res.render('blogs/update', { blog });
+        }
+        else {
+            res.redirect('/blogs/myBlogs');
+        }
     }
-    else {
-        res.redirect('/blogs/myBlogs');
+    catch (err) {
+        console.log(err);
     }
 }
 
@@ -46,50 +84,66 @@ module.exports.updateProcess = async (req, res) => {
     if (!title || !description || !published) {
         res.render('blogs/add', { msg: 'All fields are mandatory!!' });
     }
-    let blog = await Blog.findOne({ id: req.params.id, user: req.user.id });
-    if (blog) {
-        blog.title = title;
-        blog.description = description;
-        blog.published = published;
-        blog.user = req.user.id;
-        blog.author = req.user.name;
-        let blog1 = await blog.save();
-        res.render('blogs/view', { blog: blog1 });
-    }
     else {
-        res.redirect('/back');
+        try {
+            let newBlog = {
+                title,
+                description,
+                published
+            }
+            let blog = await Blog.findByIdAndUpdate(req.params.id, newBlog);
+            if (blog) {
+                res.render('blogs/view', { blog });
+            }
+            else {
+                res.redirect('/back');
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 }
 
-module.exports.delete = async (req, res) => {
-    let blog = await Blog.findOne({ id: req.params.id, user: req.user.id });
-    if (blog) {
-        await Blog.deleteOne({ id: req.params.id });
+module.exports.Delete = async (req, res) => {
+    try {
+        let blog = await Blog.findOneAndDelete(req.params.id);
         res.redirect('/blogs/myBlogs');
+
     }
-    else {
-        res.redirect('/blogs/myBlogs');
+    catch (err) {
+        console.log(err);
     }
 }
 
 module.exports.like = async (req, res) => {
-    let blog = await Blog.findOne({ id: req.params.id });
-    await blog.likes.forEach(like => {
-        if (like.user.toString() === req.user.id) {
-            res.render('blogs/view', { blog });
-        }
-    });
-    blog.likes.unshift({ user: req.user.id });
-    let blog1 = await blog.save();
-    res.render('blogs/view', { blog: blog1 });
+    try {
+        let blog = await Blog.findById(req.params.id);
+        await blog.likes.forEach(like => {
+            if (like.user.toString() === req.user.id) {
+                res.render('blogs/view', { blog });
+            }
+        });
+        blog.likes.unshift({ user: req.user.id });
+        await blog.save();
+        res.render('blogs/view', { blog });
+    }
+    catch (err) {
+        console.log(err);
+    }
 }
 
 module.exports.unlike = async (req, res) => {
-    let blog = await Blog.findOne({ id: req.params.id });
-    const removeIndex = blog.likes.map(item => item.user.toString()).indexOf(req.user.id);
-    blog.likes.splice(removeIndex, 1);
-    let blog1 = await blog.save();
-    res.render('blogs/view', { blog: blog1 });
+    try {
+        let blog = await Blog.findById(req.params.id);
+        const removeIndex = blog.likes.map(item => item.user.toString()).indexOf(req.user.id);
+        blog.likes.splice(removeIndex, 1);
+        await blog.save();
+        res.render('blogs/view', { blog });
+    }
+    catch (err) {
+        console.log(err);
+    }
 }
 
 module.exports.comment = async (req, res) => {
@@ -97,23 +151,32 @@ module.exports.comment = async (req, res) => {
     if (!comment) {
         res.redirect('/back');
     }
-    let blog = await Blog.findOne({ id: req.params.id });
-    const newComment = {
-        comment: comment,
-        user: req.user.id,
-        name: req.user.name,
-        email: req.user.email,
-        img: req.user.img
+    else {
+        try {
+            let blog = await Blog.findById(req.params.id);
+            const newComment = {
+                comment: comment,
+                user: req.user.id,
+            }
+            blog.unshift(newComment);
+            await blog.save();
+            res.render('blogs/view', { blog });
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
-    blog.unshift(newComment);
-    let blog1 = await blog.save();
-    res.render('blogs/view', { blog: blog1 });
 }
 
 module.exports.uncomment = async (req, res) => {
-    let blog = await Blog.findOne({ id: req.params.id });
-    const removeIndex = blog.comments.map(item => item.user.toString).indexOf(req.user.id);
-    blog.likes.splice(removeIndex, 1);
-    let blog1 = await blog.save();
-    res.render('blogs/view', { blog: blog1 });
+    try {
+        let blog = await Blog.findById(req.params.id);
+        const removeIndex = blog.comments.map(item => item.user.toString).indexOf(req.user.id);
+        blog.likes.splice(removeIndex, 1);
+        await blog.save();
+        res.render('blogs/view', { blog });
+    }
+    catch (err) {
+        console.log(err);
+    }
 }
