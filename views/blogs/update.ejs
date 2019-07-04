@@ -15,7 +15,7 @@
                         <div class="col-md-6">
                             <img class="img-fluid" id="output" src="../../assets/images/blogs.png" alt="img">
                             <div class="form-group mt-4">
-                                <input type="file" name="file" accept="image/*" onchange="loadFile(event)">
+                                <input type="file" name="file" required accept="image/*" onchange="loadFile(event)">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -23,12 +23,12 @@
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">Title</label>
                                 <input type="text" class="form-control" name="title" id="exampleFormControlInput1"
-                                    value="<%=blog.title%>">
+                                    value="<%=blog.title%>"  required autofocus>
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Description</label>
                                 <textarea class="form-control" name="description" id="exampleFormControlTextarea1"
-                                    rows="5"><%=blog.description%></textarea>
+                                    rows="5"  required autofocus><%=blog.description%></textarea>
                             </div>
                            
 
