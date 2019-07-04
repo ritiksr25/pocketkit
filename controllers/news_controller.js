@@ -9,34 +9,27 @@ module.exports.index = async (req, res) => {
         let response = await axios.get(`${urlForIndex}&page=${page}`);
         if (response.data.status === 'ok') {
             res.render('news/index', { news: response.data.articles });
-        }
-        else {
+        } else {
             res.render('news/index', { msg: 'Oops!! Something went wrong!' });
         }
-    }
-    catch (err) {
+    } catch (err) {
         console.log(err);
     }
-}
+};
 
 module.exports.search = async (req, res) => {
     let category = req.body.category;
-    let q = req.body.q || '';
+    let query = req.body.query || '';
     try {
-        let response = await axios.get(`${urlForSearch}category=${category}&q=${q}`);
+        let response = await axios.get(
+            `${urlForSearch}category=${category}&q=${query}`
+        );
         if (response.data.status === 'ok') {
-            if (response.data.totalResults !== 0) {
-                res.render('news/index', { news: response.data.articles });
-            }
-            else {
-                res.render('news/index', { msg: 'No results found!!' });
-            }
-        }
-        else {
+            res.render('news/index', { news: response.data.articles });
+        } else {
             res.render('news/index', { msg: 'Oops! Something went wrong!!' });
         }
-    }
-    catch (err) {
+    } catch (err) {
         console.log(err);
     }
-}
+};

@@ -1,0 +1,69 @@
+<% include ../partials/head %>
+<div class="fluid-container" style="padding-bottom: 0;">
+    <div class="container" style="height: 100%;">
+        <div class="col">
+            <h1 class="title main__title text-center pt-4">Blogs</h1>
+            <div class="col" style="display: inline-flex">
+                <div class="blogz">
+                    <span><a href="/blogs/myBlogs"><img src="../assets/images/My_blogs.png" alt="blogs"
+                                style="height: 70px; width: 70px"></a></span>
+                    <span><a href="/blogs/add"><img src="../assets/images/Add_blogs.png" alt="add"
+                                style="height: 70px; width: 70px"></a></span>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mt-4 mx-auto">
+                <div class="row">
+                    <div class="col-6 mx-auto">
+                        <img src="<%=blog.img%>" class="card-img-top img-fluid" alt="img">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="title mt-2"><%=blog.title%></h4>
+                    <p class="card-block">
+                        <%=blog.description%> </p>
+                    <p class="blockquote-footer text-right"><%=blog.user.name%></p>
+                    <span class="blockquote-footer text-right"><i class="far fa-calendar-alt"></i> <%=blog.createdAt%>
+                    </span>
+                    <a class="btn btn-outline-dark" href="/blogs/like/<%=blog._id%>"><span
+                            class="fas fa-thumbs-up"></span><%=blog.likes.length()%></button>
+                        <button class="btn btn-outline-dark"><span
+                                class="fas fa-comment"></span><%=blog.comments.length()%></button>
+                        <form action="/blogs/comment/<%=blog._id%>" method="post" class="form-group">
+                            <div class="mt-4">
+                                <h2>Leave a Comment!</h2>
+                                <p>Comment:</p>
+                                <textarea class="form-control" name="comment" id="exampleFormControlTextarea1"
+                                    rows="4"></textarea>
+                                <button type="submit"
+                                    class="btn btn-primary btn-outline-dark  sub_btn custom_btn mt-4">Comment</button>
+                            </div>
+                        </form>
+                        <div class="container">
+                            <h4>Recent Comments!</h4>
+                            <div class="row">
+                                <% blog.comments.forEach(comment => { %>
+                                <div class="col-lg-3">
+                                    <div class="col-lg-9">
+                                        <img src="<%=comment.img%>" alt="" class="img-fluid img-thumbnail">
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <h4><%=comment.name%></h4>
+                                    <div style="color: #444444; font-size: 15px;">
+                                        <span><%=comment.date%> </span>
+                                        <span>
+                                            <h6><%=comment.comment%></h6>
+                                        </span>
+                                    </div>
+                                </div>
+                                <% }) %>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %>

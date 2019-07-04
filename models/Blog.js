@@ -9,7 +9,6 @@ const BlogSchema = mongoose.Schema({
         ref: 'User',
         required: true
     },
-    createdAt: { type: Date, default: Date.now },
     likes: [{
         user: {
             type: mongoose.Schema.Types.ObjectId,
@@ -23,11 +22,13 @@ const BlogSchema = mongoose.Schema({
             ref: 'User',
             required: true
         },
-        comment: { type: String, required: true },
+        name: { type: String },
+        img: { type: String },
+        comment: { type: String },
         date: { type: Date, default: Date.now }
     }],
     published: { type: Boolean, default: true }
-})
+}, { timestamps: true })
 
 //export model
 module.exports = Blog = mongoose.model('Blog', BlogSchema);

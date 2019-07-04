@@ -1,5 +1,5 @@
 module.exports = isLoggedIn = (req, res, next) => {
-    // if(req.isAuthenticated()) return next();
-    // res.redirect('/notauth');
-    return next(); //temporary - development purpose only to facilitate testing
-}
+    if (req.isAuthenticated()) return next();
+    res.redirect("/notauth");
+    // return next(); //temporary - development purpose only to facilitate testing
+};

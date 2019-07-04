@@ -18,7 +18,7 @@ router.get('/', isLoggedIn, index);
 router.post('/', isLoggedIn, search);
 //user library
 router.get('/library', isLoggedIn, library);
-router.post('/library/add/:id', isLoggedIn, add);
+router.get('/library/add/:id', isLoggedIn, add);
 router.get('/library/delete/:id', isLoggedIn, Delete);
 
 //export router

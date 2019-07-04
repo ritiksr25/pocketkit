@@ -15,9 +15,7 @@ const {
     updateProcess,
     Delete,
     like,
-    unlike,
-    comment,
-    uncomment
+    comment
 } = require('../controllers/blogs_controller')
 
 //index route -view all user blogs
@@ -35,12 +33,10 @@ router.get('/update/:id', isLoggedIn, update);
 router.post('/update/:id', isLoggedIn, updateProcess);
 //delete blog
 router.get('/delete/:id', isLoggedIn, Delete);
-//like and unlike blog route
+//like blog route
 router.post('/like/:id', isLoggedIn, like);
-router.post('/unlike/:id', isLoggedIn, unlike);
 //comments
 router.post('/comment/:id', isLoggedIn, comment);
-router.post('/uncomment/:id', uncomment);
 
 //export router
 module.exports = router;

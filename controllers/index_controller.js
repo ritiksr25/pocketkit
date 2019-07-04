@@ -13,3 +13,7 @@ module.exports.notauth = (req, res) => {
 module.exports.notfound = (req, res) => {
     res.render('index/notfound');
 }
+
+module.exports.underdev = (req, res) => {
+    res.render('index/underdev');
+}

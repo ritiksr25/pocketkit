@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-require('dotenv').config();
+require("dotenv").config();
 
 //Connection string
 const dburl = process.env.MONGO_URI;
@@ -10,11 +10,9 @@ mongoose.Promise = global.Promise;
 connectDB = async () => {
     try {
         await mongoose.connect(dburl, { useNewUrlParser: true });
-        console.log('MongoDB Connected Successfully.');
-    }
-    catch (err) {
+        console.log("MongoDB Connected Successfully.");
+    } catch (err) {
         console.log(`Error in MongoDB Connectivity: ${err}`);
     }
-}
+};
 connectDB();
-

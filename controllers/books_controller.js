@@ -3,7 +3,7 @@ const axios = require('axios');
 const urlpart = process.env.BOOKS_API_URL_PART;
 
 module.exports.index = (req, res) => {
-    res.render('books/index');
+    res.render('books/index', { data: false });
 }
 
 module.exports.search = async (req, res) => {
@@ -13,18 +13,18 @@ module.exports.search = async (req, res) => {
     let query = req.body.query;
     try {
         let response = await axios.get(`${urlpart}q=${query}`);
-        if (response.data.totalItems !== 0) {
-            let books = response.data.items.slice(lower, upper);
-            res.render('books/result', { books });
+        if (!response.data.items) {
+            res.render('books/index', { data: true, isBooks: false });
         }
         else {
-            res.render('books/results', { msg: 'No results found!!' });
+            let books = response.data.items.slice(lower, upper);
+            res.render('books/index', { books, data: true, isBooks: true });
         }
+
     }
     catch (err) {
         console.log(err);
     }
-
 }
 
 module.exports.library = async (req, res) => {
@@ -42,20 +42,20 @@ module.exports.add = async (req, res) => {
         let response = await axios.get(`${urlpart.split('?')[0]}/${req.params.id}`);
         const newBook = {
             user: req.user.id,
-            subtitle: response.data.volumeInfo.subtitle,
-            link: response.data.accessInfo.webReaderLink,
+            bookid: req.params.id,
+            link: response.data.volumeInfo.infoLink,
             title: response.data.volumeInfo.title,
-            authors: response.data.volumeInfo.authors,
+            author: response.data.volumeInfo.authors[0],
             publisher: response.data.volumeInfo.publisher,
             publishedDate: response.data.volumeInfo.publishedDate,
             thumbnail: response.data.volumeInfo.imageLinks.thumbnail
         }
-        let book = await Library.findOne({ user: req.user.id, bookid });
+        let book = await Library.findOne({ user: req.user.id, bookid: req.params.id });
         if (book) {
-            res.redirect('/back');
+            res.render('books/library', { msg: 'Book is already in your library!!' })
         }
         else {
-            let book = await Library.create(newBook);
+            await Library.create(newBook);
             res.redirect('/books/library');
         }
     }
@@ -66,7 +66,7 @@ module.exports.add = async (req, res) => {
 
 module.exports.Delete = async (req, res) => {
     try {
-        let book = await Library.deleteOne({ user: req.user.id, id: bookid });
+        await Library.deleteOne({ user: req.user.id, bookid: req.params.id });
         res.redirect('/books/library');
     }
     catch (err) {

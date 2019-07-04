@@ -1,7 +1,7 @@
 module.exports.index = async (req, res) => {
     try {
         let blogs = await Blog.find({ published: true }).sort({ createdAt: 'desc' }).populate('user');
-        res.render('blogs/index', { blogs });
+        res.render('blogs/index', { blogs, for: 'All' });
     }
     catch (err) {
         console.log(err);
@@ -21,7 +21,7 @@ module.exports.single = async (req, res) => {
 module.exports.myBlogs = async (req, res) => {
     try {
         let blogs = await Blog.find({ user: req.user.id }).sort({ createdAt: 'desc' }).populate('user');
-        res.render('blogs/index', { blogs });
+        res.render('blogs/index', { blogs, for: 'My' });
     }
     catch (err) {
         console.log(err);
@@ -31,7 +31,7 @@ module.exports.myBlogs = async (req, res) => {
 module.exports.userBlogs = async (req, res) => {
     try {
         let blogs = await Blog.find({ user: req.params.id, published: true }).sort({ createdAt: desc }).populate('user');
-        res.render('blogs/index', { blogs });
+        res.render('blogs/index', { blogs, for: blogs.user.name });
     }
     catch (err) {
         console.log(err);
@@ -81,7 +81,7 @@ module.exports.update = async (req, res) => {
 
 module.exports.updateProcess = async (req, res) => {
     const { title, description, published } = req.body;
-    if (!title || !description || !published) {
+    if (!title || !description) {
         res.render('blogs/add', { msg: 'All fields are mandatory!!' });
     }
     else {
@@ -126,25 +126,25 @@ module.exports.like = async (req, res) => {
         });
         blog.likes.unshift({ user: req.user.id });
         await blog.save();
-        res.render('blogs/view', { blog });
+        res.redirect('/back');
     }
     catch (err) {
         console.log(err);
     }
 }
 
-module.exports.unlike = async (req, res) => {
-    try {
-        let blog = await Blog.findById(req.params.id);
-        const removeIndex = blog.likes.map(item => item.user.toString()).indexOf(req.user.id);
-        blog.likes.splice(removeIndex, 1);
-        await blog.save();
-        res.render('blogs/view', { blog });
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
+// module.exports.unlike = async (req, res) => {
+//     try {
+//         let blog = await Blog.findById(req.params.id);
+//         const removeIndex = blog.likes.map(item => item.likeBy.toString()).indexOf(req.user.id);
+//         blog.likes.splice(removeIndex, 1);
+//         await blog.save();
+//         res.redirect('/back');
+//     }
+//     catch (err) {
+//         console.log(err);
+//     }
+// }
 
 module.exports.comment = async (req, res) => {
     const comment = req.body.comment;
@@ -157,10 +157,12 @@ module.exports.comment = async (req, res) => {
             const newComment = {
                 comment: comment,
                 user: req.user.id,
+                name: req.user.name,
+                img: req.user.img
             }
             blog.unshift(newComment);
             await blog.save();
-            res.render('blogs/view', { blog });
+            res.redirect('/back');
         }
         catch (err) {
             console.log(err);
@@ -168,15 +170,15 @@ module.exports.comment = async (req, res) => {
     }
 }
 
-module.exports.uncomment = async (req, res) => {
-    try {
-        let blog = await Blog.findById(req.params.id);
-        const removeIndex = blog.comments.map(item => item.user.toString).indexOf(req.user.id);
-        blog.likes.splice(removeIndex, 1);
-        await blog.save();
-        res.render('blogs/view', { blog });
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
+// module.exports.uncomment = async (req, res) => {
+//     try {
+//         let blog = await Blog.findById(req.params.id);
+//         const removeIndex = blog.comments.map(item => item.commentBy.toString).indexOf(req.user.id);
+//         blog.likes.splice(removeIndex, 1);
+//         await blog.save();
+//         res.redirect('/back');
+//     }
+//     catch (err) {
+//         console.log(err);
+//     }
+// }

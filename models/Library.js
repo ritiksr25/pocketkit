@@ -6,10 +6,10 @@ const LibrarySchema = mongoose.Schema({
         ref: 'User',
         required: true
     },
-    subtitle: { type: String, required: true },
+    bookid: { type: String, required: true }, 
     link: { type: String, required: true },
     title: { type: String, required: true },
-    authors: { type: Array, required: true },
+    author: { type: String, required: true },
     publisher: { type: String, required: true },
     thumbnail: { type: String, required: true },
     publishedDate: { type: Date, required: true },

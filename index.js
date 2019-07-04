@@ -43,8 +43,10 @@ app.use('/movies', require('./routes/movies'));
 app.use('/news', require('./routes/news'));
 app.use('/books', require('./routes/books'));
 app.use('/contests', require('./routes/contests'));
-app.use('/blogs', require('./routes/blogs'));
+// app.use('/blogs', require('./routes/blogs'));
 
+// under dev
+app.get('/blogs', require('./controllers/index_controller').underdev);
 //404 route
 app.get('*', require('./controllers/index_controller').notfound);
 

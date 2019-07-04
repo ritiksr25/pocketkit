@@ -1,0 +1,41 @@
+<% include ../partials/head %>
+<div class="fluid-container" style="padding-bottom: 0;">
+    <div class="container">
+        <div class="col">
+            <h1 class="title main__title text-center pt-4">Books</h1>
+        </div>
+        <h1 class="title main__title pt-4" style="font-size: 20px; margin-bottom: 30px">My Library :</h1>
+        <div class="row mt-4">
+            <% if(books.length !== 0){
+                        books.forEach(book => { %>
+            <div class="col-lg-4">
+                <div class="card">
+                    <img class="card-img-top" src="<%=book.thumbnail%>">
+                    <h4 class="card-title mt-2"><%=book.title%></h4>
+
+                    <p class="card-block">
+                        <strong class=" description">Author: </strong><%=book.author%>
+                    </p>
+                    <p class="card-block">
+                        <strong class=" description">Publisher: </strong><%=book.publisher%>
+                    </p>
+                    <p class="card-block">
+                        <strong class=" description">Date: </strong><%=book.publishedDate%>
+                    </p>
+                    <a href="/books/library/delete/<%=book.bookid%>"
+                        class="btn btn-outline-dark sec_btn custom_btn ml-0 mb-2">Delete from Library</a>
+                    <a class="btn-more text-center" href="<%=book.link%>" target="_blank">See More</a>
+                </div>
+            </div>
+            <% }) } else { %>
+
+            <div class="col-lg-12">
+                <h1 class="title main__title text-center pt-4">No Books in Library!!!</h1>
+            </div>
+
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

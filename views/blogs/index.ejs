@@ -1,0 +1,50 @@
+<% include ../partials/head %>
+<div class="fluid-container" style="padding-bottom: 0;">
+    <div class="container">
+        <div class="col">
+            <h1 class="title main__title text-center pt-4">Blogs</h1>
+            <div class="col" style="display: inline-flex">
+                <div class="blogz">
+                    <span><a href="/blogs/myBlogs"><img src="../assets/images/My_blogs.png" alt="blogs"
+                                style="height: 70px; width: 70px"></a></span>
+                    <span><a href="/blogs/add"><img src="../assets/images/Add_blogs.png" alt="add"
+                                style="height: 70px; width: 70px"></a></span>
+                </div>
+            </div>
+        </div>
+        <div class="all" style="display: block">
+            <h5 class="title" style="color: #444444;"><%=for%> Blogs :</h5>
+            <div class="container pt-4 pb-4">
+                <div class="row">
+                    <% if(blogs.length !== 0) {
+                            blogs.forEach(blog => { %>
+                    <div class="col-lg-4 mt-4">
+                        <div class="card">
+                            <img class="card-img-top" src="<%=blog.img%>">
+                            <h4 class="card-title mt-2"><%=blog.title%></h4>
+                            <p class="card-block"
+                                style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
+                                <%=blog.description%> </p>
+                            <div class="blog-meta">
+                                <a class="m-gap"><span><i class="far fa-calendar-alt"></i><%=blog.createdAt%>
+                                    </span></a>
+
+                            </div>
+                            <br>
+                            <a class="btn-more text-center" href="/blogs/view/<%=blog._id%>">See More</a>
+                        </div>
+                    </div>
+                    <% }) } else { %>
+
+                    <div class="col-lg-12">
+                        <h1 class="title main__title text-center pt-4">No Results!</h1>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<% include ../partials/footer %>

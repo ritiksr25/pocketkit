@@ -1,0 +1,50 @@
+<% include ../partials/head %>
+<div class="fluid-container">
+    <div class="container">
+        <div class="col">
+            <h1 class="title main_title text-center pt-4">Movie</h1>
+        </div>
+        <div class="col-lg-10 mx-auto">
+            <div class="card">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img class="img-fluid mb-4" <% if(movie.Poster == "N/A") { %> src="../assets/images/movies.jpg"
+                            <% } else { %> src="<%=movie.Poster%>" <% } %>>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="info">
+                            <h1 class="title" style="font-size: 30px"><%=movie.Title%></h1>
+                            <span><i class="fas fa-calendar"></i><strong class="description"> Date of Release :</strong>
+                                <%=movie.Released%></span>
+                            <br>
+                            <span><i class="fas fa-clock"></i><strong class="description"> Runtime :</strong>
+                                <%=movie.Runtime%></span>
+                            <br>
+                            <span><strong class="description"> Genre :</strong> <%=movie.Genre%></span>
+                            <br>
+                            <span><i class="fas fa-tag"></i><strong class="description"> Plot :</strong>
+                                <%=movie.Plot%></span>
+                            <br>
+                            <span><i class="fas fa-users"></i><strong class="description"> Actors :</strong>
+                                <%=movie.Actors%></span>
+                            <br>
+                            <br>
+                            <span><i class="fas fa-globe"></i><strong class="description"> Country :</strong>
+                                <%=movie.Country%></span>
+                            <br>
+                            <br>
+                            <span><i class="fas fa-language"></i><strong class="description"> Language :</strong>
+                                <%=movie.Language%></span>
+                            <br>
+                            <span><i class="fas fa-star"></i></i><strong class="description"> Rating :</strong><strong>
+                                    <%=movie.imdbRating%></strong>/10 <i class="fab fa-imdb"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<% include ../partials/footer %>
