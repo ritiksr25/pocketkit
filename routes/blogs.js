@@ -16,25 +16,30 @@ const {
     Delete,
     like,
     comment
-} = require('../controllers/blogs_controller')
+} = require('../controllers/blogs_controller');
+
+// img upload
+const {
+    upload
+} = require('../config/imgupload');
 
 //index route -view all user blogs
 router.get('/', isLoggedIn, index);
 //view single blog
-router.get('/id/:id', isLoggedIn, single);
+router.get('/view/:id', isLoggedIn, single);
 //user blogs
 router.get('/myBlogs', isLoggedIn, myBlogs);
 router.get('/user/:id', userBlogs);
 //add blog
 router.get('/add', isLoggedIn, add);
-router.post('/add', isLoggedIn, addProcess);
+router.post('/add', isLoggedIn, upload.single('file'), addProcess);
 //update blog
 router.get('/update/:id', isLoggedIn, update);
-router.post('/update/:id', isLoggedIn, updateProcess);
+router.post('/update/:id', isLoggedIn, upload.single('file'), updateProcess);
 //delete blog
 router.get('/delete/:id', isLoggedIn, Delete);
 //like blog route
-router.post('/like/:id', isLoggedIn, like);
+router.get('/like/:id', isLoggedIn, like);
 //comments
 router.post('/comment/:id', isLoggedIn, comment);
 

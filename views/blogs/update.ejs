@@ -1,4 +1,5 @@
 <% include ../partials/head %>
+
 <div class="fluid-container" style="padding-bottom: 0;">
     <div class="container" style="height: 100%;">
         <div class="col">
@@ -9,12 +10,12 @@
                 <div class="col">
                     <h3 class="title main__title text-center pt-4">Update Blog</h3>
                 </div>
-                <form action="/blogs/add" method="post" enctype="multipart/form-data">
+                <form action="/blogs/update/<%=blog._id%>" method="post" enctype="multipart/form-data">
                     <div class="row mt-4">
                         <div class="col-md-6">
-                            <img class="img-fluid" id="output" src="../assets/images/blogs.png" alt="img">
+                            <img class="img-fluid" id="output" src="../../assets/images/blogs.png" alt="img">
                             <div class="form-group mt-4">
-                                <input type="file" name="pic" accept="image/*" onchange="loadFile(event)">
+                                <input type="file" name="file" accept="image/*" onchange="loadFile(event)">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -27,12 +28,9 @@
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Description</label>
                                 <textarea class="form-control" name="description" id="exampleFormControlTextarea1"
-                                    rows="5" name="editor"><%=blog.description%></textarea>
+                                    rows="5"><%=blog.description%></textarea>
                             </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" name="published">
-                                <label class="form-check-label" for="exampleCheck1">Published</label>
-                            </div>
+                           
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-outline-dark sub_btn custom_btn btn-block">Update
@@ -45,5 +43,17 @@
         </div>
     </div>
 </div>
-
+<script>
+        var loadFile = function (event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('output');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        };
+    </script>
+    <script>
+        CKEDITOR.replace('exampleFormControlTextarea1');
+    </script>
 <% include ../partials/footer %>

@@ -1,4 +1,10 @@
 <% include ../partials/head %>
+    <%if(!err) { %>
+        <div></div>
+    <% } else { %>
+         <div><%=msg%></div>
+    <% } %>
+
 <div class="fluid-container" style="padding-bottom: 0;">
     <div class="container" style="height: 100%;">
         <div class="col">
@@ -27,12 +33,9 @@
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Description</label>
                                 <textarea class="form-control" name="description" id="exampleFormControlTextarea1"
-                                    rows="5" name="editor"></textarea>
+                                    rows="5"></textarea>
                             </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" name="published">
-                                <label class="form-check-label" for="exampleCheck1">Published</label>
-                            </div>
+                            
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-outline-dark sub_btn custom_btn btn-block">Add
@@ -56,6 +59,6 @@
     };
 </script>
 <script>
-    CKEDITOR.replace('editor');
+    CKEDITOR.replace('exampleFormControlTextarea1');
 </script>
 <% include ../partials/footer %>
