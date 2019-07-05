@@ -1,79 +1,87 @@
 <% include ../partials/head %>
-<div class="fluid-container" style="padding-bottom: 0;">
-    <div class="container" style="height: 100%;">
-        <div class="col">
-            <h1 class="title main_title text-center pt-4">Contest</h1>
-        </div>
-        <div class="mt-4">
-            <a href="#" class="btn btn-outline-dark sec_btn custom_btn mb-4" style="background: #fff; color: #444444;"
-                onclick="upcoming()">Upcoming Contest</a>
-            <a href="#" class="btn btn-outline-dark sec_btn custom_btn mb-4" style="background: #fff; color: #444444;"
-                onclick="ongoing()">Ongoing Contest</a>
-        </div>
-        <div class="ongoing" style="display: none">
-            <div class="container pt-4 pb-4">
-                <h5 class="title" style="color: #444444;">Ongoing Contest</h5>
-                <p class="description">Here is the List!</p>
-                <br>
-                <div class="row">
-                    <% ongoing.forEach(contest => { %>
-                    <div class="col-lg-4 col-sm-8 col-12">
-                        <div class=" card " style="padding: 16px; ">
-                            <h5 class="title "><%= contest.Name %></h5>
-                            <span class="platform"><%= contest.Platform %></span>
-                            <p class="description "><strong>End Date:</strong>
-                                <br> <%= contest.EndTime %>
-                            </p>
-                            <a class="btn-more text-center " href="<%= contest.url %>" target="_blank">See More</a>
-                        </div>
+    <div class="fluid-container" style="padding-bottom: 0;">
+        <div class="container" style="height: 100%;">
+            <div class="col">
+                <h1 class="title main_title text-center pt-4">Contest</h1>
+            </div>
+            <div class="mt-4">
+                <a href="#" class="btn btn-outline-dark sec_btn custom_btn mb-4" style="background: #fff; color: #444444;" onclick="upcoming()">Upcoming Contest</a>
+                <a href="#" class="btn btn-outline-dark sec_btn custom_btn mb-4" style="background: #fff; color: #444444;" onclick="ongoing()">Ongoing Contest</a>
+            </div>
+            <div class="ongoing" style="display: none">
+                <div class="container pt-4 pb-4">
+                    <h5 class="title" style="color: #444444;">Ongoing Contest</h5>
+                    <p class="description">Here is the List!</p>
+                    <br>
+                    <div class="row">
+                        <% ongoing.forEach(contest => { %>
+                            <div class="col-lg-4 col-sm-8 col-12">
+                                <div class=" card">
+                                    <h5 class="title contest_title text-center">
+                                        <%= contest.Name %>
+                                    </h5>
+                                    <span class="platform"><%= contest.Platform %></span>
+                                    <p class="description "><strong>End Date:</strong>
+                                        <br>
+                                        <%= contest.EndTime %>
+                                    </p>
+                                    <a class="btn-more text-center " href="<%= contest.url %>" target="_blank">See More</a>
+                                </div>
+                            </div>
+                            <% }) %>
                     </div>
-                    <% }) %>
                 </div>
             </div>
-        </div>
 
-        <div class="upcoming" style="display: block">
-            <div class="container pt-4 pb-4">
-                <h5 class="title" style="color: #444444;">Upcoming Contest</h5>
-                <p class="description">Here is the List!</p>
-                <br>
-                <div class="row">
-                    <% upcoming.forEach(contest => { %>
-                    <div class="col-lg-4 col-sm-8 col-12">
-                        <div class=" card " style="padding: 16px; ">
-                            <h5 class="title "><%= contest.Name %></h5>
-                            <span class="platform"><%=contest.Platform%></span>
-                            <p class="description "><strong>Start Date:</strong>
-                                <br> <%= contest.StartTime %>
-                            </p>
-                            <p class="description "><strong>End Date:</strong>
-                                <br> <%= contest.EndTime %>
-                            </p>
-                            <p class="description "><strong>Duration:</strong>
-                                <br><%= contest.Duration %>
-                            </p>
-                            <a class="btn-more text-center " href="<%= contest.url %>" target="_blank">See More</a>
-                        </div>
+            <div class="upcoming" style="display: block">
+                <div class="container pt-4 pb-4">
+                    <h5 class="title" style="color: #444444;">Upcoming Contest</h5>
+                    <p class="description">Here is the List!</p>
+                    <br>
+                    <div class="row">
+                        <% upcoming.forEach(contest => { %>
+                            <div class="col-lg-4 col-sm-8 col-12">
+                                <div class=" card ">
+                                    <h5 class="title contest_title text-center">
+                                        <%= contest.Name %>
+                                    </h5>
+                                    <span class="platform"><%=contest.Platform%></span>
+                                    <p class="description "><strong>Start Date:</strong>
+                                        <br>
+                                        <%= contest.StartTime %>
+                                    </p>
+                                    <p class="description "><strong>End Date:</strong>
+                                        <br>
+                                        <%= contest.EndTime %>
+                                    </p>
+                                    <p class="description "><strong>Duration:</strong>
+                                        <br>
+                                        <%= contest.Duration %>
+                                    </p>
+                                    <a class="btn-more text-center " href="<%= contest.url %>" target="_blank">See More</a>
+                                </div>
+                            </div>
+                            <% }) %>
+
+
                     </div>
-                    <% }) %>
-
-
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
-</div>
-<script>
-    var on = document.querySelector('.ongoing');
-    var up = document.querySelector('.upcoming');
-    function ongoing() {
-        on.style.display = 'block';
-        up.style.display = 'none';
-    }
-    function upcoming() {
-        up.style.display = 'block';
-        on.style.display = 'none';
-    }
-</Script>
-<% include ../partials/footer %>
+    <script>
+        var on = document.querySelector('.ongoing');
+        var up = document.querySelector('.upcoming');
+
+        function ongoing() {
+            on.style.display = 'block';
+            up.style.display = 'none';
+        }
+
+        function upcoming() {
+            up.style.display = 'block';
+            on.style.display = 'none';
+        }
+    </Script>
+    <% include ../partials/footer %>
