@@ -1,0 +1,24 @@
+<% include ../partials/head %>
+<div class="fluid-container" style="padding-bottom: 0;">
+    <div class="container" style="height: 100%;">
+        <div class="col">
+            <h1 class="title main__title text-center pt-4"><%=user.name%>'s Profile</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-5 mx-auto">
+                <div class="card mt-4 mx-auto">
+                    <img src="<%=user.img%>" class="card-img-top mx-auto" alt="user_img"
+                        style="height: 200px;width: 200px; border-radius: 50%;"><br>
+                    <ul class="list-group">
+                        <li class="list-group-item">Name: <%=user.name%></li>
+                        <li class="list-group-item">Email: <%=user.email%></li>
+
+                    </ul>
+                    <a href="/" class="btn btn-primary" title="Return">Return</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %>

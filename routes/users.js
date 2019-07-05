@@ -4,9 +4,9 @@ const passport = require('passport');
 const router = express.Router();
 
 //load authcheck
-const isLoggedIn = require('../config/authcheck');
+const { isLoggedIn } = require('../config/authcheck');
 //load controller file
-const { login, logout } = require('../controllers/user_controller');
+const { login, logout, profile } = require('../controllers/user_controller');
 
 //login route
 router.get('/login', passport.authenticate('google', { scope: ['profile', 'email'] }));
@@ -15,6 +15,8 @@ router.get('/login/callback', passport.authenticate('google', { failureRedirect:
     login)
 //logout route
 router.get('/logout', isLoggedIn, logout);
+// profile
+router.get('/profile', isLoggedIn, profile);
 
 //export router
 module.exports = router;

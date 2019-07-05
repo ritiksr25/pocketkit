@@ -2,12 +2,12 @@
 <div class="fluid-container" style="padding-bottom: 0;">
     <div class="container">
         <div class="col">
-            <h1 class="title main__title text-center pt-4">Blogs</h1>
+            <h1 class="title main__title text-center pt-4"><%=data%> Blogs</h1>
             <div class="col" style="display: inline-flex">
                 <div class="blogz">
-                    <span><a href="/blogs/myBlogs"><img src="../assets/images/My_blogs.png" alt="blogs"
+                    <span><a href="/blogs/myBlogs"><img src="../../assets/images/My_blogs.png" alt="blogs"
                                 style="height: 70px; width: 70px"></a></span>
-                    <span><a href="/blogs/add"><img src="../assets/images/Add_blogs.png" alt="add"
+                    <span><a href="/blogs/add"><img src="../../assets/images/Add_blogs.png" alt="add"
                                 style="height: 70px; width: 70px"></a></span>
                 </div>
             </div>
@@ -20,18 +20,20 @@
                             blogs.forEach(blog => { %>
                     <div class="col-lg-4 mt-4">
                         <div class="card">
-                            <img class="card-img-top" src="<%=blog.img.url%>">
+                            <img class="card-img-top" 
+                            <% if(!blog.img.url) { %> src="../../assets/images/blog.jpg"
+                            <% } else { %> src="<%=blog.img.url%>" <% } %>>
                             <h4 class="card-title mt-2"><%=blog.title%></h4>
                             <p class="card-block"
                                 style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
-                                <%-blog.description.slice(0,340)%> </p>
-                                <h5 class="blockquote-footer text-right"><%=blog.by.name%></h5>
+                                </p>
+                                <h5 class="blockquote-footer text-right"><a href="/blogs/user/<%=blog.by._id%>"><%=blog.by.name%></a></h5>
                             <div class="blog-meta">
-                                <a class="m-gap"><span><i class="far fa-calendar-alt"></i><%=blog.createdAt%>
-                                </span></a>
-                                <!-- <a class="m-gap"><span><i class="fas fa-heart"><%=blog.likes.length%></i>
-                                </span></a> -->
-                                <a class="m-gap"><span><i class="fas fa-comment"><%=blog.comments.length%></i>
+                                <a class="m-gap"><span><i class="far fa-calendar-alt"></i><%=blog.createdAt.toString().slice(0,15)%>
+                                </span></a><br><br>
+                                <a class="m-gap"><span><i class="fas fa-heart"> <%=blog.likes.length%></i>
+                                </span></a>&nbsp;&nbsp;
+                                <a class="m-gap"><span><i class="fas fa-comment"> <%=blog.comments.length%></i>
                                 </span></a>
                             </div>
                             <br>

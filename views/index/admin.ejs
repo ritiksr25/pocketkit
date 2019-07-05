@@ -1,0 +1,38 @@
+<% include ../partials/head %>
+<div class="fluid-container">
+    <div class="container">
+        <div class="col">
+            <h1 class="title main__title text-center pt-4">Admin Dashboard</h1>
+        </div>
+        <div class="row" style="margin-top: 20px; margin-bottom: 40px">
+            <div class="col-lg-10 mx-auto">
+                <h5 style="margin-top: 80px">Users of the application: </h5>
+                    <br><br>
+                    <div class="card">
+                    <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              
+                              <% users.forEach(user => { %>
+                                <tr>
+                                <td><img src="<%=user.img%>" alt="logo" style="height: 40px; width: 40px; border-radius: 5px;"></td>
+                                <td><%=user.name%></td>
+                                <td><%=user.email%></td>
+                                <td><%=user.createdAt.toString().slice(0,15)%></td>
+                              </tr>
+                              <% }) %>
+                            </tbody>
+                          </table>
+                          </div>
+            </div>
+            
+        </div>
+    </div>
+    <% include ../partials/footer %>

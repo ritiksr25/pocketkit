@@ -31,9 +31,22 @@
                     <a class="nav-link" href="/blogs">Blogs</a>
                 </li>
                 <% if(user) { %>
-                <a href="/users/logout" class="btn btn-outline-dark sec_btn custom_btn"
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="<%=user.img%>" alt="logo" style="height: 25px; width: 25px; border-radius: 5px;"><%=user.name%>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="/users/profile"><img class="mr-2" src="/assets/images/profile.png"
+                                    height="15px;" width="15px;"> Profile</a>
+                                <a class="dropdown-item" href="/users/logout"><img class="mr-2" src="/assets/images/search.png"
+                                    height="15px;" width="15px;"> Logout</a>
+                            </div>
+                        </div>
+                    </li>
+                <!-- <a href="/users/logout" class="btn btn-outline-dark sec_btn custom_btn"
                     style="background: #fff; color: #4C4A78;"><img class="mr-2" src="/assets/images/search.png"
-                        height="22px" width="22px">Sign Out</a>
+                        height="22px" width="22px">Sign Out</a> -->
                 <% } else { %>
                 <a href="/users/login" class="btn btn-outline-dark sec_btn custom_btn"
                     style="background: #fff; color: #4C4A78;"><img class="mr-2" src="/assets/images/search.png"

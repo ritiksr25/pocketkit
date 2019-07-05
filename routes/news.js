@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //load authcheck
-const isLoggedIn = require('../config/authcheck');
+const { isLoggedIn } = require('../config/authcheck');
 //load controllers
 const { index, search } = require('../controllers/news_controller');
 

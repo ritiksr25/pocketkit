@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //load authcheck
-const isLoggedIn = require('../config/authcheck');
+const { isLoggedIn } = require('../config/authcheck');
 //load controller files
 const { index, search, view } = require('../controllers/movies_controller');
 

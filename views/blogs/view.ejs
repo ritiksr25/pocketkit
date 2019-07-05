@@ -13,7 +13,9 @@
             <div class="card mt-4 mx-auto">
                 <div class="row">
                     <div class="col-6 mx-auto">
-                        <img src="<%=blog.img.url%>" class="card-img-top img-fluid" alt="img">
+                        <img class="card-img-top img-fluid" alt="img"
+                        <% if(!blog.img.url) { %> src="../../assets/images/blog.jpg"
+                            <% } else { %> src="<%=blog.img.url%>" <% } %>>
                     </div>
                 </div>
                 <div class="card-body">
@@ -23,7 +25,7 @@
                     </p>
                     <p class="blockquote-footer text-right"><%=blog.by.name%></p>
                     <span class="blockquote-footer text-right"><i class="far fa-calendar-alt"></i> <%=blog.createdAt%>  </span>
-                    <!-- <a class="btn btn-outline-dark" href = "/blogs/like/<%=blog._id%>"><span class="fas fa-heart"><%=blog.likes.length%></span></a> -->
+                    <a class="btn btn-outline-dark" href = "/blogs/like/<%=blog._id%>"><span class="fas fa-heart"><%=blog.likes.length%></span></a>
                     <a class="btn btn-outline-dark"><span class="fas fa-comment"><%=blog.comments.length%></span></a>
                     <% if(user.id == blog.by.id) { %>
                         <a href="/blogs/update/<%=blog._id%>" class="btn btn-outline-dark edit">Update</a>

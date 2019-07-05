@@ -4,8 +4,8 @@ const BlogSchema = mongoose.Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
     img: {
-        id: { type: String, required: true },
-        url: { type: String, required: true }
+        id: { type: String },
+        url: { type: String }
     },
     by: {
         type: mongoose.Schema.Types.ObjectId,
@@ -25,6 +25,7 @@ const BlogSchema = mongoose.Schema({
         comment: { type: String },
         date: { type: Date, default: Date.now }
     }],
+    published: { type: Boolean }
 }, { timestamps: true })
 
 //export model
