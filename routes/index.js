@@ -3,7 +3,7 @@ const router = express.Router();
 
 //load controllers
 const { index, about, notauth } = require('../controllers/index_controller');
-const { admin } = require('../controllers/user_controller');
+const { admin, deleteUser } = require('../controllers/user_controller');
 
 const { adminAuth } = require('../config/authcheck');
 
@@ -15,6 +15,8 @@ router.get('/about', about);
 router.get('/notauth', notauth);
 // admin route
 router.get('/admin', adminAuth, admin);
+// remove a user
+router.get('/admin/delete/:id', adminAuth, deleteUser);
 
 //export router
 module.exports = router;
