@@ -1,42 +1,47 @@
 <% include ../partials/head %>
-<div class="fluid-container" style="padding-bottom: 0;">
-    <div class="container" style="height: 100%;">
-        <div class="col">
-            <h1 class="title main__title text-center pt-4">Blogs</h1>
-            <div class="col" style="display: inline-flex">
-                <div class="blogz">
-                    <span><a href="/blogs/add"><img src="../../assets/images/Add_blogs.png" alt="add" style="height: 70px; width: 70px"></a></span>
-                </div>
-            </div>
-        </div>
-        <div class="col pt-4">
-            <div class="card mt-4 mx-auto">
-                <div class="row">
-                    <div class="col-6 mx-auto">
-                        <img class="card-img-top img-fluid" alt="img"
-                        <% if(!blog.img.url) { %> src="../../assets/images/blog.jpg"
-                            <% } else { %> src="<%=blog.img.url%>" <% } %>>
+    <div class="fluid-container" style="padding-bottom: 0;">
+        <div class="container" style="height: 100%;">
+            <div class="col">
+                <h1 class="title main__title text-center pt-4">Blogs</h1>
+                <div class="col" style="display: inline-flex">
+                    <div class="blogz">
+                        <span><a href="/blogs/add"><img src="../../assets/images/Add_blogs.png" alt="add" style="height: 70px; width: 70px"></a></span>
                     </div>
                 </div>
-                <div class="card-body">
-                    <h4 class="title mt-2"><%=blog.title%></h4>
-                    <p class="card-block">
-                        <%-blog.description%>
-                    </p>
-                    <p class="blockquote-footer text-right"><%=blog.by.name%></p>
-                    <span class="blockquote-footer text-right"><i class="far fa-calendar-alt"></i> <%=blog.createdAt%>  </span>
-                    <a class="btn btn-outline-dark" href = "/blogs/like/<%=blog._id%>"><span class="fas fa-heart"><%=blog.likes.length%></span></a>
-                    <a class="btn btn-outline-dark"><span class="fas fa-comment"><%=blog.comments.length%></span></a>
-                    <% if(user.id == blog.by.id) { %>
-                        <a href="/blogs/update/<%=blog._id%>" class="btn btn-outline-dark edit">Update</a>
-                        <a href="/blogs/delete/<%=blog._id%>" onclick="return confirm('Are you sure you want to delete this Blog?');" class="btn btn-outline-dark edit">Delete</a>    
-                    <% } %>
-                    <form class="form-group" action = "/blogs/comment/<%=blog._id%>" method = "post">
-                        <div class="mt-4">
-                            <h2>Leave a Comment!</h2>
-                            <p>Comment:</p>
-                            <textarea class="form-control" name = "comment" rows="4"></textarea>
-                            <button type="submit" class="btn btn-primary btn-outline-dark sub_btn custom_btn mt-4">Comment</a>
+            </div>
+            <div class="col pt-4">
+                <div class="card mt-4 mx-auto">
+                    <div class="row">
+                        <div class="col-6 mx-auto">
+                            <img class="card-img-top img-fluid" alt="img" <% if(!blog.img.url) { %> src="../../assets/images/blog.jpg"
+                            <% } else { %> src="
+                                <%=blog.img.url%>"
+                                    <% } %>>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="title mt-2">
+                            <%=blog.title%>
+                        </h4>
+                        <p class="card-block">
+                            <%-blog.description%>
+                        </p>
+                        <p class="blockquote-footer text-right">
+                            <%=blog.by.name%>
+                        </p>
+                        <span class="blockquote-footer text-right"><i class="far fa-calendar-alt"></i> <%=blog.createdAt%>  </span>
+                        <a class="btn btn-outline-dark" href="/blogs/like/<%=blog._id%>"><span class="fas fa-heart"> <%=blog.likes.length%></span></a>
+                        <button class="btn btn-outline-dark cmnt"><span class="fas fa-comment"> <%=blog.comments.length%></span></button>
+                        <% if(user.id == blog.by.id) { %>
+                            <a href="/blogs/update/<%=blog._id%>" class="btn btn-outline-dark edit">Update</a>
+                            <a href="/blogs/delete/<%=blog._id%>" onclick="return confirm('Are you sure you want to delete this Blog?');" class="btn btn-outline-dark del">Delete</a>
+                            <% } %>
+                                <form class="form-group" action="/blogs/comment/<%=blog._id%>" method="post">
+                                    <div class="mt-4">
+                                        <h2>Leave a Comment!</h2>
+                                        <p>Comment:</p>
+                                        <textarea class="form-control" name="comment" rows="4"></textarea>
+                                        <button type="submit" class="btn btn-primary btn-outline-dark sub_btn custom_btn mt-4">Comment</a>
                         </div>
                     </form>
                     <div class="container">
@@ -52,7 +57,7 @@
                                 <h4><%=comment.name%></h4>
                                 <div style="color: #444444; font-size: 15px;">
                                     <span><%=comment.date%>  </span>
-                                    <span><h6 ><%=comment.comment%></h6></span>
+                                    <p><h6 class="title" ><%=comment.comment%></h6></p>
                                 </div>
                             </div>
                         </div>

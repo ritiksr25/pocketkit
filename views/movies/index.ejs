@@ -1,219 +1,216 @@
 <% include ../partials/head %>
-<div class="fluid-container" style="padding-bottom: 0;">
-    <div class="container">
-        <div class="col">
-            <h1 class="title main__title text-center pt-4">Movies</h1>
-        </div>
-        <h1 class="title main__title pt-4" style="font-size: 20px; margin-bottom: 30px">Search Movies</h1>
-        <form action="/movies" method="post">
-            <div class="row">
-                <div class="col-lg-3">
-                    <input class="search-input mb-4" name="query" type="text" placeholder="What are you looking for?">
-                </div>
-                <div class="col-lg-3">
-                    <button type="submit" class="btn btn-outline-dark sub_btn custom_btn btn-block">Search</button>
-                </div>
+    <div class="fluid-container" style="padding-bottom: 0;">
+        <div class="container">
+            <div class="col">
+                <h1 class="title main__title text-center pt-4">Movies</h1>
             </div>
-        </form>
+            <h1 class="title main__title pt-4" style="font-size: 20px; margin-bottom: 30px">Search Movies</h1>
+            <form action="/movies" method="post">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <input class="search-input mb-4" name="query" type="text" placeholder="What are you looking for?">
+                    </div>
+                    <div class="col-lg-3">
+                        <button type="submit" class="btn btn-outline-dark sub_btn custom_btn btn-block">Search</button>
+                    </div>
+                </div>
+            </form>
 
-        <div>
-            <div class="recommended-movies" style="display: block">
-                <h1 class="title main__title pt-4" style="font-size: 20px; padding: 0; margin: 0;">
-                    <% if(data) { %> Search Results:
-                    <% } else { %> Recommended Movies: <% } %>
-                </h1>
-                <div class="row mt-4">
-                    <% if(data) { 
+            <div>
+                <div class="recommended-movies" style="display: block">
+                    <h1 class="title main__title pt-4" style="font-size: 20px; padding: 0; margin: 0;">
+                        <% if(data) { %> Search Results:
+                            <% } else { %> Recommended Movies:
+                                <% } %>
+                    </h1>
+                    <div class="row mt-4">
+                        <% if(data) { 
                                             if(isMovies == true){
                                                 movies.forEach(movie => { %>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <img class="card-img-top" style="height: 400px;" <% if(movie.Poster == "N/A") { %>
-                                src="../assets/images/movies.jpg" <% } else { %> src="<%=movie.Poster%>" <% } %>>
-                            <h4 class="card-title mt-2"><%=movie.Title%></h4>
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <img class="card-img-top" style="height: 400px;" <% if(movie.Poster=="N/A" ) { %> src="../assets/images/movies.jpg"
+                                    <% } else { %> src="
+                                        <%=movie.Poster%>"
+                                            <% } %>>
+                                                <h4 class="card-title mt-2">
+                                                    <%=movie.Title%>
+                                                </h4>
 
-                            <p class="card-block">
-                                <strong class=" description">Year: </strong><%=movie.Year%>
-                            </p>
-                            <p class="card-block">
-                                <strong class=" description">Type: </strong><%=movie.Type%>
-                            </p>
+                                                <p class="card-block">
+                                                    <strong class=" description">Year: </strong>
+                                                    <%=movie.Year%>
+                                                </p>
+                                                <p class="card-block">
+                                                    <strong class=" description">Type: </strong>
+                                                    <%=movie.Type%>
+                                                </p>
 
-                            <a class="btn-more text-center" href="/movies/<%=movie.imdbID%>">See More</a>
-                        </div>
+                                                <a class="btn-more text-center" href="/movies/<%=movie.imdbID%>">See More</a>
+                                </div>
+                            </div>
+                            <% }) } else { %>
+
+                                <div class="col-lg-12">
+                                    <h1 class="title main__title text-center pt-4">No Results!</h1>
+                                </div>
+
+                                <% } } else { %>
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <img class="card-img-top" src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg">
+                                            <h4 class="card-title mt-2">Avengers: Endgame</h4>
+
+                                            <p class="card-block">
+                                                <strong class=" description">Year: </strong>2019
+                                            </p>
+                                            <p class="card-block">
+                                                <strong class=" description">Type: </strong>Movie
+                                            </p>
+
+                                            <a class="btn-more text-center" href="/movies/tt4154796" target="_blank">See More</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <img class="card-img-top" src="https://m.media-amazon.com/images/M/MV5BMTE0YWFmOTMtYTU2ZS00ZTIxLWE3OTEtYTNiYzBkZjViZThiXkEyXkFqcGdeQXVyODMzMzQ4OTI@._V1_SX300.jpg">
+                                            <h4 class=" card-title mt-2">Captain Marvel</h4>
+
+                                            <p class="card-block">
+                                                <strong class=" description">Year: </strong>2019
+                                            </p>
+                                            <p class="card-block">
+                                                <strong class=" description">Type: </strong>Movie
+                                            </p>
+
+                                            <a class="btn-more text-center" href="/movies/tt4154664" target="_blank">See More</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <img class="card-img-top" src="https://m.media-amazon.com/images/M/MV5BNmZjZDQ1N2QtMTNkMS00OGYyLWI2MTktOWVlMzliMjlhMTBjXkEyXkFqcGdeQXVyODkwNDUwNw@@._V1_SX300.jpg">
+                                            <h4 class=" card-title mt-2">Shazam</h4>
+
+                                            <p class="card-block">
+                                                <strong class=" description">Year: </strong>2017
+                                            </p>
+                                            <p class="card-block">
+                                                <strong class=" description">Type: </strong>Movie
+                                            </p>
+
+                                            <a class="btn-more text-center" href="/movies/tt6723576" target="_blank">See More</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <img class="card-img-top" src="https://m.media-amazon.com/images/M/MV5BMTYzMDM4NzkxOV5BMl5BanBnXkFtZTgwNzM1Mzg2NzM@._V1_SX300.jpg">
+                                            <h4 class=" card-title mt-2">Toy Story 4</h4>
+
+                                            <p class="card-block">
+                                                <strong class=" description">Year: </strong>2019
+                                            </p>
+                                            <p class="card-block">
+                                                <strong class=" description">Type: </strong>Movie
+                                            </p>
+
+                                            <a class="btn-more text-center" href="/movies/tt1979376" target="_blank">See More</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <img class="card-img-top" src="https://m.media-amazon.com/images/M/MV5BOGFjYWNkMTMtMTg1ZC00Y2I4LTg0ZTYtN2ZlMzI4MGQwNzg4XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg">
+                                            <h4 class=" card-title mt-2">Godzilla: King of the Monsters</h4>
+
+                                            <p class="card-block">
+                                                <strong class=" description">Year: </strong>2019
+                                            </p>
+                                            <p class="card-block">
+                                                <strong class=" description">Type: </strong>Movie
+                                            </p>
+
+                                            <a class="btn-more text-center" href="/movies/tt3741700" target="_blank">See More</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <img class="card-img-top" src="https://m.media-amazon.com/images/M/MV5BOTIyMTNkMWQtZDJlYi00OGJmLTliN2MtOGE0YjY4NzFiYTNmXkEyXkFqcGdeQXVyOTAzMTc2MjA@._V1_SX300.jpg">
+                                            <h4 class=" card-title mt-2">Kabir Singh</h4>
+
+                                            <p class="card-block">
+                                                <strong class=" description">Year: </strong>2019
+                                            </p>
+                                            <p class="card-block">
+                                                <strong class=" description">Type: </strong>Movie
+                                            </p>
+
+                                            <a class="btn-more text-center" href="/movies/tt8983202" target="_blank">See More</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <img class="card-img-top" src="https://m.media-amazon.com/images/M/MV5BZDkzMTQ1YTMtMWY4Ny00MzExLTkzYzEtNzZhOTczNzU2NTU1XkEyXkFqcGdeQXVyODY3NjMyMDU@._V1_SX300.jpg">
+                                            <h4 class=" card-title mt-2">Gully Boy</h4>
+
+                                            <p class="card-block">
+                                                <strong class=" description">Year: </strong>2019
+                                            </p>
+                                            <p class="card-block">
+                                                <strong class=" description">Type: </strong>Movie
+                                            </p>
+
+                                            <a class="btn-more text-center" href="/movies/tt2395469" target="_blank">See More</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <img class="card-img-top" src="https://m.media-amazon.com/images/M/MV5BMWU4ZjNlNTQtOGE2MS00NDI0LWFlYjMtMmY3ZWVkMjJkNGRmXkEyXkFqcGdeQXVyNjE1OTQ0NjA@._V1_SX300.jpg">
+                                            <h4 class=" card-title mt-2">Uri: The Surgical Strike</h4>
+
+                                            <p class="card-block">
+                                                <strong class=" description">Year: </strong>2019
+                                            </p>
+                                            <p class="card-block">
+                                                <strong class=" description">Type: </strong>Movie
+                                            </p>
+
+                                            <a class="btn-more text-center" href="/movies/tt8291224" target="_blank">See More</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <img class="card-img-top" src="https://m.media-amazon.com/images/M/MV5BMTQ4MzQzMzM2Nl5BMl5BanBnXkFtZTgwMTQ1NzU3MDI@._V1_SX300.jpg">
+                                            <h4 class=" card-title mt-2">Dangal</h4>
+
+                                            <p class="card-block">
+                                                <strong class=" description">Year: </strong>2016
+                                            </p>
+                                            <p class="card-block">
+                                                <strong class=" description">Type: </strong>Movie
+                                            </p>
+
+                                            <a class="btn-more text-center" href="/movies/tt5074352" target="_blank">See More</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <img class="card-img-top" src="https://m.media-amazon.com/images/M/MV5BYTRhZWVkNTctMzRmYy00MDk1LWIzNDYtMjA1ZGE5YWJkYjU0XkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg">
+                                            <h4 class=" card-title mt-2">Kesari</h4>
+
+                                            <p class="card-block">
+                                                <strong class=" description">Year: </strong>2019
+                                            </p>
+                                            <p class="card-block">
+                                                <strong class=" description">Type: </strong>Movie
+                                            </p>
+
+                                            <a class="btn-more text-center" href="/movies/tt6264938" target="_blank">See More</a>
+                                        </div>
+                                    </div>
+
+                                    <% } %>
                     </div>
-                    <% }) } else { %>
-
-                    <div class="col-lg-12">
-                        <h1 class="title main__title text-center pt-4">No Results!</h1>
-                    </div>
-
-                    <% } } else { %>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <img class="card-img-top"
-                                src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg">
-                            <h4 class="card-title mt-2">Avengers: Endgame</h4>
-
-                            <p class="card-block">
-                                <strong class=" description">Year: </strong>2019
-                            </p>
-                            <p class="card-block">
-                                <strong class=" description">Type: </strong>Movie
-                            </p>
-
-                            <a class="btn-more text-center" href="/movies/tt4154796" target="_blank">See More</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <img class="card-img-top"
-                                src="https://m.media-amazon.com/images/M/MV5BMTE0YWFmOTMtYTU2ZS00ZTIxLWE3OTEtYTNiYzBkZjViZThiXkEyXkFqcGdeQXVyODMzMzQ4OTI@._V1_SX300.jpg">
-                            <h4 class=" card-title mt-2">Captain Marvel</h4>
-
-                            <p class="card-block">
-                                <strong class=" description">Year: </strong>2019
-                            </p>
-                            <p class="card-block">
-                                <strong class=" description">Type: </strong>Movie
-                            </p>
-
-                            <a class="btn-more text-center" href="/movies/tt4154664" target="_blank">See More</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <img class="card-img-top"
-                                src="https://m.media-amazon.com/images/M/MV5BNmZjZDQ1N2QtMTNkMS00OGYyLWI2MTktOWVlMzliMjlhMTBjXkEyXkFqcGdeQXVyODkwNDUwNw@@._V1_SX300.jpg">
-                            <h4 class=" card-title mt-2">Shazam</h4>
-
-                            <p class="card-block">
-                                <strong class=" description">Year: </strong>2017
-                            </p>
-                            <p class="card-block">
-                                <strong class=" description">Type: </strong>Movie
-                            </p>
-
-                            <a class="btn-more text-center" href="/movies/tt6723576" target="_blank">See More</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <img class="card-img-top"
-                                src="https://m.media-amazon.com/images/M/MV5BMTYzMDM4NzkxOV5BMl5BanBnXkFtZTgwNzM1Mzg2NzM@._V1_SX300.jpg">
-                            <h4 class=" card-title mt-2">Toy Story 4</h4>
-
-                            <p class="card-block">
-                                <strong class=" description">Year: </strong>2019
-                            </p>
-                            <p class="card-block">
-                                <strong class=" description">Type: </strong>Movie
-                            </p>
-
-                            <a class="btn-more text-center" href="/movies/tt1979376" target="_blank">See More</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <img class="card-img-top"
-                                src="https://m.media-amazon.com/images/M/MV5BOGFjYWNkMTMtMTg1ZC00Y2I4LTg0ZTYtN2ZlMzI4MGQwNzg4XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg">
-                            <h4 class=" card-title mt-2">Godzilla: King of the Monsters</h4>
-
-                            <p class="card-block">
-                                <strong class=" description">Year: </strong>2019
-                            </p>
-                            <p class="card-block">
-                                <strong class=" description">Type: </strong>Movie
-                            </p>
-
-                            <a class="btn-more text-center" href="/movies/tt3741700" target="_blank">See More</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <img class="card-img-top"
-                                src="https://m.media-amazon.com/images/M/MV5BOTIyMTNkMWQtZDJlYi00OGJmLTliN2MtOGE0YjY4NzFiYTNmXkEyXkFqcGdeQXVyOTAzMTc2MjA@._V1_SX300.jpg">
-                            <h4 class=" card-title mt-2">Kabir Singh</h4>
-
-                            <p class="card-block">
-                                <strong class=" description">Year: </strong>2019
-                            </p>
-                            <p class="card-block">
-                                <strong class=" description">Type: </strong>Movie
-                            </p>
-
-                            <a class="btn-more text-center" href="/movies/tt8983202" target="_blank">See More</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <img class="card-img-top"
-                                src="https://m.media-amazon.com/images/M/MV5BZDkzMTQ1YTMtMWY4Ny00MzExLTkzYzEtNzZhOTczNzU2NTU1XkEyXkFqcGdeQXVyODY3NjMyMDU@._V1_SX300.jpg">
-                            <h4 class=" card-title mt-2">Gully Boy</h4>
-
-                            <p class="card-block">
-                                <strong class=" description">Year: </strong>2019
-                            </p>
-                            <p class="card-block">
-                                <strong class=" description">Type: </strong>Movie
-                            </p>
-
-                            <a class="btn-more text-center" href="/movies/tt2395469" target="_blank">See More</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <img class="card-img-top"
-                                src="https://m.media-amazon.com/images/M/MV5BMWU4ZjNlNTQtOGE2MS00NDI0LWFlYjMtMmY3ZWVkMjJkNGRmXkEyXkFqcGdeQXVyNjE1OTQ0NjA@._V1_SX300.jpg">
-                            <h4 class=" card-title mt-2">Uri: The Surgical Strike</h4>
-
-                            <p class="card-block">
-                                <strong class=" description">Year: </strong>2019
-                            </p>
-                            <p class="card-block">
-                                <strong class=" description">Type: </strong>Movie
-                            </p>
-
-                            <a class="btn-more text-center" href="/movies/tt8291224" target="_blank">See More</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <img class="card-img-top"
-                                src="https://m.media-amazon.com/images/M/MV5BMTQ4MzQzMzM2Nl5BMl5BanBnXkFtZTgwMTQ1NzU3MDI@._V1_SX300.jpg">
-                            <h4 class=" card-title mt-2">Dangal</h4>
-
-                            <p class="card-block">
-                                <strong class=" description">Year: </strong>2016
-                            </p>
-                            <p class="card-block">
-                                <strong class=" description">Type: </strong>Movie
-                            </p>
-
-                            <a class="btn-more text-center" href="/movies/tt5074352" target="_blank">See More</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <img class="card-img-top"
-                                src="https://m.media-amazon.com/images/M/MV5BYTRhZWVkNTctMzRmYy00MDk1LWIzNDYtMjA1ZGE5YWJkYjU0XkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg">
-                            <h4 class=" card-title mt-2">Kesari</h4>
-
-                            <p class="card-block">
-                                <strong class=" description">Year: </strong>2019
-                            </p>
-                            <p class="card-block">
-                                <strong class=" description">Type: </strong>Movie
-                            </p>
-
-                            <a class="btn-more text-center" href="/movies/tt6264938" target="_blank">See More</a>
-                        </div>
-                    </div>
-
-                    <% } %>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<% include ../partials/footer %>
+    <% include ../partials/footer %>
