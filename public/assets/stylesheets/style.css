@@ -119,6 +119,11 @@ a:hover {
     border: 0;
 }
 
+.cmnt:hover {
+    background: #ffe72e;
+    border: 0;
+}
+
 li {
     list-style: none;
     font-size: 12px;
