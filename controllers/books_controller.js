@@ -11,19 +11,24 @@ module.exports.search = async (req, res) => {
     let lower = 10 * page - 10;
     let upper = 10 * page;
     let query = req.body.query;
-    try {
-        let response = await axios.get(`${urlpart}q=${query}`);
-        if (!response.data.items) {
-            res.render('books/index', { data: true, isBooks: false });
+    if(query) {
+        try {
+            let response = await axios.get(`${urlpart}q=${query}`);
+            if (!response.data.items) {
+                res.render('books/index', { data: true, isBooks: false });
+            }
+            else {
+                let books = response.data.items.slice(lower, upper);
+                res.render('books/index', { books, data: true, isBooks: true });
+            }
+    
         }
-        else {
-            let books = response.data.items.slice(lower, upper);
-            res.render('books/index', { books, data: true, isBooks: true });
+        catch (err) {
+            console.log(err);
         }
-
     }
-    catch (err) {
-        console.log(err);
+    else{
+        res.redirect('/books');
     }
 }
 

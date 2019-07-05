@@ -16,7 +16,7 @@ module.exports.admin = async (req, res) => {
     res.render('index/admin', { users });
 }
 
-module.exports.deleteUser = async (req, res) => {
-    let user = await User.findByIdAndDelete(req.params.id);
-    res.redirect('/admin');
-}
+// module.exports.deleteUser = async (req, res) => {
+//     let user = await User.findByIdAndDelete(req.params.id);
+//     res.redirect('/admin');
+// }
