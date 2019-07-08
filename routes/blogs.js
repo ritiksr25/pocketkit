@@ -27,7 +27,7 @@ router.get('/', isLoggedIn, index);
 router.get('/view/:id', isLoggedIn, single);
 //user blogs
 router.get('/myBlogs', isLoggedIn, myBlogs);
-router.get('/user/:id', userBlogs);
+router.get('/user/:id', isLoggedIn, userBlogs);
 //add blog
 router.get('/add', isLoggedIn, add);
 router.post('/add', isLoggedIn, upload.single('file'), addProcess);
