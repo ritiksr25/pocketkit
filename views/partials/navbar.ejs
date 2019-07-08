@@ -1,38 +1,16 @@
-<nav
-	class="navbar navbar-expand-lg navbar-light bg-light"
-	style="box-shadow: 2px 0px 6px #707070; background: #fff!important;"
->
+<nav class="navbar navbar-expand-lg navbar-light bg-light"
+	style="box-shadow: 2px 0px 6px #707070; background: #fff!important;">
 	<div class="container">
-		<img
-			src="/assets/images/logo.png"
-			alt="logo"
-			height="25px"
-			;
-			width="25px"
-		/>
-		<a
-			class="navbar-brand"
-			style="font-weight: 700; margin-left: 4px"
-			href="/"
-			>Pocket <span style="color: #1A73E8; ">KIT</span></a
-		>
-		<button
-			class="navbar-toggler"
-			type="button"
-			data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent"
-			aria-expanded="false"
-			aria-label="Toggle navigation"
-		>
+		<img src="/assets/images/logo.png" alt="logo" height="25px" ; width="25px" />
+		<a class="navbar-brand" style="font-weight: 700; margin-left: 4px" href="/">Pocket <span
+				style="color: #1A73E8; ">KIT</span></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<i class="fa fa-bars"></i>
 		</button>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul
-				class="navbar-nav mr-auto nav justify-content-end custom_nav"
-				style="width: 100%;"
-			>
+			<ul class="navbar-nav mr-auto nav justify-content-end custom_nav" style="width: 100%;">
 				<li class="nav-item">
 					<a class="nav-link" href="/about">About</a>
 				</li>
@@ -54,58 +32,25 @@
 				<% if(user) { %>
 				<li class="nav-item">
 					<div class="dropdown">
-						<a
-							class="nav-link dropdown-toggle"
-							role="button"
-							id="dropdownMenuLink"
-							data-toggle="dropdown"
-							aria-haspopup="true"
-							aria-expanded="false"
-						>
-							<img
-								class="mr-2"
-								src="<%=user.img%>"
-								alt="logo"
-								style="height: 25px; width: 25px; border-radius: 5px;"
-							/><%=user.name%>
+						<a class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							<img class="mr-2" src="<%=user.img%>" alt="logo"
+								style="height: 25px; width: 25px; border-radius: 5px;" /><%=user.name%>
 						</a>
-						<div
-							class="dropdown-menu"
-							aria-labelledby="dropdownMenuLink"
-						>
-							<a class="dropdown-item" href="/users/profile"
-								><img
-									class="mr-2"
-									src="/assets/images/profile.png"
-									height="15px;"
-									width="15px;"
-								/>
-								Profile</a
-							>
-							<a class="dropdown-item" href="/users/logout"
-								><img
-									class="mr-2"
-									src="/assets/images/search.png"
-									height="15px;"
-									width="15px;"
-								/>
-								Logout</a
-							>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							<a class="dropdown-item" href="/users/profile"><img class="mr-2"
+									src="/assets/images/profile.png" height="15px;" width="15px;" />
+								Profile</a>
+							<a class="dropdown-item" href="/users/logout"><img class="mr-2"
+									src="/assets/images/search.png" height="15px;" width="15px;" />
+								Logout</a>
 						</div>
 					</div>
 				</li>
 				<% } else { %>
-				<a
-					href="/users/login"
-					class="btn btn-outline-dark sec_btn custom_btn"
-					style="background: #fff; color: #4C4A78;"
-					><img
-						class="mr-2"
-						src="/assets/images/search.png"
-						height="22px"
-						width="22px"
-					/>Sign In</a
-				>
+				<a href="/users/login" class="btn btn-outline-dark sec_btn custom_btn"
+					style="background: #fff; color: #4C4A78;"><img class="mr-2" src="/assets/images/search.png"
+						height="22px" width="22px" />Sign In</a>
 				<% } %>
 			</ul>
 		</div>

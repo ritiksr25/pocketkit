@@ -12,81 +12,35 @@
 						Update Blog
 					</h3>
 				</div>
-				<form
-					action="/blogs/update/<%=blog._id%>"
-					method="post"
-					enctype="multipart/form-data"
-				>
+				<form action="/blogs/update/<%=blog._id%>" method="post" enctype="multipart/form-data">
 					<div class="row mt-4">
 						<div class="col-md-6">
-							<img
-								class="img-fluid"
-								id="output"
-								<%
-								if(!blog.img.url)
-								{
-								%
-							/>
-							src="../../assets/images/blog.jpg" <% } else { %>
-							src="<%=blog.img.url%>" <% } %>>
+							<img class="img-fluid" id="output" 
+							<% if(!blog.img.url) { %>
+							src="../../assets/images/blog.jpg" <% } else { %> src="<%=blog.img.url%>" <% } %>>
 							<div class="form-group mt-4">
-								<input
-									type="file"
-									name="file"
-									accept="image/*"
-									onchange="loadFile(event)"
-								/>
+								<input type="file" name="file" accept="image/*" onchange="loadFile(event)" />
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="exampleFormControlInput1"
-									>Title</label
-								>
-								<input
-									type="text"
-									class="form-control"
-									name="title"
-									id="exampleFormControlInput1"
-									value="<%=blog.title%>"
-									required
-									autofocus
-								/>
+								<label for="exampleFormControlInput1">Title</label>
+								<input type="text" class="form-control" name="title" id="exampleFormControlInput1"
+									value="<%=blog.title%>" required autofocus />
 							</div>
 							<div class="form-group">
-								<label for="exampleFormControlTextarea1"
-									>Description</label
-								>
-								<textarea
-									class="form-control"
-									name="description"
-									id="exampleFormControlTextarea1"
-									rows="5"
-									required
-									autofocus
-								>
-<%-blog.description%></textarea
-								>
+								<label for="exampleFormControlTextarea1">Description</label>
+								<textarea class="form-control" name="description" id="exampleFormControlTextarea1"
+									rows="5" required autofocus>
+<%-blog.description%></textarea>
 							</div>
 							<div class="form-group form-check">
-								<input
-									type="checkbox"
-									class="form-check-input"
-									name="published"
-									id="published"
-								/>
-								<label
-									class="form-check-label"
-									for="exampleCheck1"
-									>Published</label
-								>
+								<input type="checkbox" class="form-check-input" name="published" id="published" />
+								<label class="form-check-label" for="exampleCheck1">Published</label>
 							</div>
 
 							<div class="form-group">
-								<button
-									type="submit"
-									class="btn btn-outline-dark sub_btn custom_btn btn-block"
-								>
+								<button type="submit" class="btn btn-outline-dark sub_btn custom_btn btn-block">
 									Update Blog
 								</button>
 							</div>
@@ -98,9 +52,9 @@
 	</div>
 </div>
 <script>
-	var loadFile = function(event) {
+	var loadFile = function (event) {
 		var reader = new FileReader();
-		reader.onload = function() {
+		reader.onload = function () {
 			var output = document.getElementById('output');
 			output.src = reader.result;
 		};

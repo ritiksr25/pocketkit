@@ -4,22 +4,14 @@
 		<div class="col">
 			<h1 class="title main__title text-center pt-4">News</h1>
 		</div>
-		<h1
-			class="title main__title pt-4"
-			style="font-size: 20px; margin-bottom: 30px"
-		>
+		<h1 class="title main__title pt-4" style="font-size: 20px; margin-bottom: 30px">
 			Search News
 		</h1>
 		<form action="/news" method="post">
 			<div class="row">
 				<div class="col-lg-3">
-					<input
-						class="search-input mb-4"
-						name="query"
-						id="txt"
-						type="text"
-						placeholder="What are you looking for?"
-					/>
+					<input class="search-input mb-4" name="query" id="txt" type="text"
+						placeholder="What are you looking for?" />
 				</div>
 				<div class="col-lg-3">
 					<div class="form-group">
@@ -35,10 +27,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3">
-					<button
-						type="submit"
-						class="btn btn-outline-dark sub_btn custom_btn btn-block"
-					>
+					<button type="submit" class="btn btn-outline-dark sub_btn custom_btn btn-block">
 						Search
 					</button>
 				</div>
@@ -47,10 +36,7 @@
 
 		<div>
 			<div class="recommended-news" style="display: block">
-				<h1
-					class="title main__title pt-4"
-					style="font-size: 20px; padding: 0; margin: 0;"
-				>
+				<h1 class="title main__title pt-4" style="font-size: 20px; padding: 0; margin: 0;">
 					News:
 				</h1>
 				<div class="row mt-4">
@@ -62,28 +48,18 @@
 							else { %> src="<%=news.urlToImage%>" <% } %>>
 							<h4 class="card-title mt-2"><%=news.title%></h4>
 							<p class="card-block">
-								<strong class=" description"
-									>Description: </strong
-								><%=news.description%>
+								<strong class=" description">Description: </strong><%=news.description%>
 							</p>
 							<p class="card-block">
-								<strong class=" description">Date: </strong
-								><%=news.publishedAt%>
+								<strong class=" description">Date: </strong><%=news.publishedAt%>
 							</p>
 							<p class="card-block">
-								<strong class=" description">Author: </strong
-								><%=news.author%>
+								<strong class=" description">Author: </strong><%=news.author%>
 							</p>
 							<p class="card-block">
-								<strong class=" description">Source: </strong
-								><%=news.source.name%>
+								<strong class=" description">Source: </strong><%=news.source.name%>
 							</p>
-							<a
-								class="btn-more text-center"
-								href="<%=news.url%>"
-								target="_blank"
-								>See More</a
-							>
+							<a class="btn-more text-center" href="<%=news.url%>" target="_blank">See More</a>
 						</div>
 					</div>
 					<% }) } else { %>
