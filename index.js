@@ -13,11 +13,13 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true
-}))
+app.use(
+	session({
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		saveUninitialized: true
+	})
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -27,9 +29,9 @@ require('./config/passport')(passport);
 
 //global variables
 app.use((req, res, next) => {
-    res.locals.user = req.user || null;
-    next();
-})
+	res.locals.user = req.user || null;
+	next();
+});
 
 //models
 const User = require('./models/User');
@@ -46,13 +48,13 @@ app.use('/contests', require('./routes/contests'));
 app.use('/blogs', require('./routes/blogs'));
 
 // under dev
-// app.get('/blogs', require('./controllers/index_controller').underdev);
+
 //404 route
 app.get('*', require('./controllers/index_controller').notfound);
 
 //setting up server
 const PORT = process.env.PORT;
-app.listen(PORT, (err) => {
-    if (err) console.log('Error in running Server.');
-    else console.log(`Server is up and running on Port ${PORT}`);
+app.listen(PORT, err => {
+	if (err) console.log('Error in running Server.');
+	else console.log(`Server is up and running on Port ${PORT}`);
 });

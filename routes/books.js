@@ -5,11 +5,11 @@ const router = express.Router();
 const { isLoggedIn } = require('../config/authcheck');
 //load controllers
 const {
-    index,
-    search,
-    library,
-    add,
-    Delete
+	index,
+	search,
+	library,
+	add,
+	Delete
 } = require('../controllers/books_controller');
 
 //books index route

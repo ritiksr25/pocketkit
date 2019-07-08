@@ -5,23 +5,21 @@ const router = express.Router();
 const { isLoggedIn } = require('../config/authcheck');
 //load controller
 const {
-    index,
-    single,
-    myBlogs,
-    userBlogs,
-    add,
-    addProcess,
-    update,
-    updateProcess,
-    Delete,
-    like,
-    comment
+	index,
+	single,
+	myBlogs,
+	userBlogs,
+	add,
+	addProcess,
+	update,
+	updateProcess,
+	Delete,
+	like,
+	comment
 } = require('../controllers/blogs_controller');
 
 // img upload
-const {
-    upload
-} = require('../config/imgupload');
+const { upload } = require('../config/imgupload');
 
 //index route -view all user blogs
 router.get('/', isLoggedIn, index);

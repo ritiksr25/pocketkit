@@ -1,27 +1,41 @@
 <% include ../partials/head %>
-    <div class="fluid-container" style="padding-bottom: 0;">
-        <div class="container" style="height: 100%;">
-            <div class="col">
-                <h1 class="title main__title text-center pt-4">
-                    <%=user.name%>'s Profile</h1>
-            </div>
+<div class="fluid-container" style="padding-bottom: 0;">
+	<div class="container" style="height: 100%;">
+		<div class="col">
+			<h1 class="title main__title text-center pt-4">
+				<%=user.name%>'s Profile
+			</h1>
+		</div>
 
-            <div class="row">
-                <div class="col-lg-6 mx-auto">
-                    <div class="card mt-4 mx-auto">
-                        <img src="<%=user.img%>" class="card-img-top img-fluid rounded-circle mx-auto" alt="user_img" style="height: 200px;width: 200px;"><br>
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong class="description"><i class="fas fa-user"></i></strong>
-                                <%=user.name%>
-                            </li>
-                            <li class="list-group-item"><strong class="description"><i class="fas fa-envelope-square"></i></strong>
-                                <%=user.email%>
-                            </li>
-                        </ul>
-                        <a href="/" class="btn btn-primary mt-2" title="Return">Return</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <% include ../partials/footer %>
+		<div class="row">
+			<div class="col-lg-6 mx-auto">
+				<div class="card mt-4 mx-auto">
+					<img
+						src="<%=user.img%>"
+						class="card-img-top img-fluid rounded-circle mx-auto"
+						alt="user_img"
+						style="height: 200px;width: 200px;"
+					/><br />
+					<ul class="list-group">
+						<li class="list-group-item">
+							<strong class="description"
+								><i class="fas fa-user"></i
+							></strong>
+							<%=user.name%>
+						</li>
+						<li class="list-group-item">
+							<strong class="description"
+								><i class="fas fa-envelope-square"></i
+							></strong>
+							<%=user.email%>
+						</li>
+					</ul>
+					<a href="/" class="btn btn-primary mt-2" title="Return"
+						>Return</a
+					>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% include ../partials/footer %>

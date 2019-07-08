@@ -1,94 +1,130 @@
 <% include ../partials/head %>
 <div class="fluid-container" style="padding-bottom: 0;">
-    <div class="container">
-        <div class="col">
-            <h1 class="title main__title text-center pt-4">Books</h1>
-            <div class="col" style="display: inline-flex">
-                <div class="blogz">
-                    <span><a href="/books/library"><img src="../assets/images/My Library.png" alt="blogs"
-                                style="height: 70px; width: 70px"></a></span>
-                </div>
-            </div>
-        </div>
-        <h1 class="title main__title pt-4" style="font-size: 20px; margin-bottom: 30px">Search any Book</h1>
-        <form action="/books" method="post">
-            <div class="row">
-                <div class="col-lg-3">
-                    <input class="search-input mb-4" name="query" type="text" placeholder="What are you looking for?" required>
-                </div>
-                <div class="col-lg-3">
-                    <button type="submit" class="btn btn-outline-dark sub_btn custom_btn btn-block">Search</button>
-                </div>
-            </div>
-        </form>
-        <div>
-            <div class="recommended-books" style="display: block">
-                <h1 class="title main__title pt-4" style="font-size: 20px; padding: 0; margin: 0;">
-                    <% if(data) { %> Search Results:
-                    <% } else { %> Recommended Books:
-                    <% } %>
-                </h1>
-                <div class="row mt-4">
+	<div class="container">
+		<div class="col">
+			<h1 class="title main__title text-center pt-4">Books</h1>
+			<div class="col" style="display: inline-flex">
+				<div class="blogz">
+					<span
+						><a href="/books/library"
+							><img
+								src="../assets/images/My Library.png"
+								alt="blogs"
+								style="height: 70px; width: 70px"/></a
+					></span>
+				</div>
+			</div>
+		</div>
+		<h1
+			class="title main__title pt-4"
+			style="font-size: 20px; margin-bottom: 30px"
+		>
+			Search any Book
+		</h1>
+		<form action="/books" method="post">
+			<div class="row">
+				<div class="col-lg-3">
+					<input
+						class="search-input mb-4"
+						name="query"
+						type="text"
+						placeholder="What are you looking for?"
+						required
+					/>
+				</div>
+				<div class="col-lg-3">
+					<button
+						type="submit"
+						class="btn btn-outline-dark sub_btn custom_btn btn-block"
+					>
+						Search
+					</button>
+				</div>
+			</div>
+		</form>
+		<div>
+			<div class="recommended-books" style="display: block">
+				<h1
+					class="title main__title pt-4"
+					style="font-size: 20px; padding: 0; margin: 0;"
+				>
+					<% if(data) { %> Search Results: <% } else { %> Recommended
+					Books: <% } %>
+				</h1>
+				<div class="row mt-4">
+					<% if(data) { if(isBooks == true){ books.forEach(book => {
+					%>
+					<div class="col-lg-4">
+						<div class="card">
+							<img
+								class="card-img-top"
+								src="<%=book.volumeInfo.imageLinks.thumbnail%>"
+							/>
+							<h4 class="card-title mt-2">
+								<%=book.volumeInfo.title%>
+							</h4>
 
-                    <% if(data) { 
-                        if(isBooks == true){
-                            books.forEach(book => { %>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <img class="card-img-top" src="<%=book.volumeInfo.imageLinks.thumbnail%>">
-                            <h4 class="card-title mt-2">
-                                <%=book.volumeInfo.title%>
-                            </h4>
+							<p class="card-block">
+								<strong class=" description">Author: </strong>
+								<%=book.volumeInfo.authors%>
+							</p>
+							<p class="card-block">
+								<strong class=" description"
+									>Publisher:
+								</strong>
+								<%=book.volumeInfo.publisher%>
+							</p>
+							<p class="card-block">
+								<strong class=" description">Date: </strong>
+								<%=book.volumeInfo.publishedDate%>
+							</p>
+							<p class="card-block">
+								<strong class=" description"
+									>Description:
+								</strong>
+								<% if(book.volumeInfo.description){ %>
+								<%=book.volumeInfo.description.slice(0,200)%> <%
+								} else { %> NA <% } %>
+							</p>
+							<p class="card-block">
+								<strong class=" description">Category: </strong>
+								<%=book.volumeInfo.categories%>
+							</p>
+							<a
+								href="/books/library/add/<%=book.id%>"
+								class="btn btn-outline-dark sec_btn custom_btn ml-0 mb-2"
+								>Add to Library</a
+							>
+							<a
+								class="btn-more text-center"
+								href="<%=book.volumeInfo.infoLink%>"
+								target="_blank"
+								>See More</a
+							>
+						</div>
+					</div>
+					<% }) } else { %>
 
-                            <p class="card-block">
-                                <strong class=" description">Author: </strong>
-                                <%=book.volumeInfo.authors%>
-                            </p>
-                            <p class="card-block">
-                                <strong class=" description">Publisher: </strong>
-                                <%=book.volumeInfo.publisher%>
-                            </p>
-                            <p class="card-block">
-                                <strong class=" description">Date: </strong>
-                                <%=book.volumeInfo.publishedDate%>
-                            </p>
-                            <p class="card-block">
-                                <strong class=" description">Description:
-                                </strong>
-                                <% if(book.volumeInfo.description){ %>
-                                <%=book.volumeInfo.description.slice(0,200)%>
-                                <% } else { %>
-                                NA
-                                <% } %>
-                            </p>
-                            <p class="card-block">
-                                <strong class=" description">Category: </strong>
-                                <%=book.volumeInfo.categories%>
-                            </p>
-                            <a href="/books/library/add/<%=book.id%>"
-                                class="btn btn-outline-dark sec_btn custom_btn ml-0 mb-2">Add to Library</a>
-                            <a class="btn-more text-center" href="<%=book.volumeInfo.infoLink%>" target="_blank">See
-                                More</a>
-                        </div>
-                    </div>
-                    <% }) } else { %>
+					<div class="col-lg-12">
+						<h1 class="title main__title text-center pt-4">
+							No Results!
+						</h1>
+						<br />
+						<br />
+					</div>
 
-                    <div class="col-lg-12">
-                        <h1 class="title main__title text-center pt-4">No Results!</h1>
-                        <br>
-                        <br>
-                    </div>
-
-                    <% } } else { %>
-                    <div class="col-lg-12">
-                        <h1 class="title main__title text-center pt-4">Search any Book!!</h1>
-                        <br>
-                        <br>
-                    </div>
-                    <% } %>
-                </div>
-            </div>
-        </div>
-    </div>
+					<% } } else { %>
+					<div class="col-lg-12">
+						<h1 class="title main__title text-center pt-4">
+							Search any Book!!
+						</h1>
+						<br />
+						<br />
+					</div>
+					<% } %>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <% include ../partials/footer %>

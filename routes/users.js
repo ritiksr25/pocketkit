@@ -9,10 +9,16 @@ const { isLoggedIn } = require('../config/authcheck');
 const { login, logout, profile } = require('../controllers/user_controller');
 
 //login route
-router.get('/login', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get(
+	'/login',
+	passport.authenticate('google', { scope: ['profile', 'email'] })
+);
 //login callback route
-router.get('/login/callback', passport.authenticate('google', { failureRedirect: '/notauth' }),
-    login)
+router.get(
+	'/login/callback',
+	passport.authenticate('google', { failureRedirect: '/notauth' }),
+	login
+);
 //logout route
 router.get('/logout', isLoggedIn, logout);
 // profile
@@ -20,4 +26,3 @@ router.get('/profile', isLoggedIn, profile);
 
 //export router
 module.exports = router;
-

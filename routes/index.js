@@ -15,8 +15,6 @@ router.get('/about', about);
 router.get('/notauth', notauth);
 // admin route
 router.get('/admin', adminAuth, admin);
-// // remove a user
-// router.get('/admin/delete/:id', adminAuth, deleteUser);
 
 //export router
 module.exports = router;
