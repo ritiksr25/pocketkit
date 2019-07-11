@@ -2,26 +2,18 @@ const axios = require('axios');
 
 const urlpart = process.env.BOOKS_API_URL_PART;
 
-module.exports.index = (req, res) => {
-	res.render('books/index', { data: false });
-};
-
-module.exports.search = async (req, res) => {
-	let query = req.body.query;
+module.exports.index = async (req, res) => {
+	let query = req.query.search;
 	if (query) {
 		try {
 			let response = await axios.get(`${urlpart}q=${query}`);
-			if (!response.data.items) {
-				res.render('books/index', { data: true, isBooks: false });
-			} else {
-				let books = response.data.items;
-				res.render('books/index', { books, data: true, isBooks: true });
-			}
+			let books = response.data.items;
+			res.render('books/index', { books, data: true });
 		} catch (err) {
 			console.log(err);
 		}
 	} else {
-		res.redirect('/books');
+		res.render('books/index', { data: false });
 	}
 };
 

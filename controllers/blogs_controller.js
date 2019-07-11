@@ -1,10 +1,26 @@
 const { deleteImg } = require('../config/imgupload');
-
+escapeRegex = text => {
+	return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+};
 module.exports.index = async (req, res) => {
+	let query = req.query.search;
+	let blogs;
 	try {
-		let blogs = await Blog.find({ published: true })
-			.sort({ createdAt: 'desc' })
-			.populate('by');
+		if (query) {
+			const regex = new RegExp(escapeRegex(query), 'gi');
+			blogs = await Blog.find({
+				$and: [
+					{ published: true },
+					{ $or: [{ title: regex }, { description: regex }] }
+				]
+			})
+				.sort({ createdAt: 'desc' })
+				.populate('by');
+		} else {
+			blogs = await Blog.find({ published: true })
+				.sort({ createdAt: 'desc' })
+				.populate('by');
+		}
 		res.render('blogs/index', { blogs, data: 'All ' });
 	} catch (err) {
 		console.log(err);
@@ -40,7 +56,7 @@ module.exports.userBlogs = async (req, res) => {
 			res.redirect('/blogs/myBlogs');
 		} else {
 			let user = await User.findById(req.params.id);
-			res.render('blogs/index', { blogs, data: `${user.name} "s ` });
+			res.render('blogs/index', { blogs, data: `${user.name} 's ` });
 		}
 	} catch (err) {
 		console.log(err);

@@ -13,10 +13,10 @@
 		<h1 class="title main__title pt-4" style="font-size: 20px; margin-bottom: 30px">
 			Search any Book
 		</h1>
-		<form action="/books" method="post">
+		<form action="/books" method="get">
 			<div class="row">
 				<div class="col-lg-3">
-					<input class="search-input mb-4" name="query" type="text" placeholder="What are you looking for?"
+					<input class="search-input mb-4" name="search" type="text" placeholder="What are you looking for?"
 						required />
 				</div>
 				<div class="col-lg-3">
@@ -33,7 +33,7 @@
 					Books: <% } %>
 				</h1>
 				<div class="row mt-4">
-					<% if(data) { if(isBooks == true){ books.forEach(book => {
+					<% if(data) { if(books){ books.forEach(book => {
 					%>
 					<div class="col-lg-4">
 						<div class="card">

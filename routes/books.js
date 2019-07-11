@@ -6,7 +6,6 @@ const { isLoggedIn } = require('../config/authcheck');
 //load controllers
 const {
 	index,
-	search,
 	library,
 	add,
 	Delete
@@ -14,8 +13,6 @@ const {
 
 //books index route
 router.get('/', isLoggedIn, index);
-//search results
-router.post('/', isLoggedIn, search);
 //user library
 router.get('/library', isLoggedIn, library);
 router.get('/library/add/:id', isLoggedIn, add);

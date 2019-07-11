@@ -3,13 +3,30 @@
 	<div class="container">
 		<div class="col">
 			<h1 class="title main__title text-center pt-4"><%=data%> Blogs</h1>
+			<h1 class="title main__title pt-4" style="font-size: 20px; margin-bottom: 30px">
+				Search Blogs
+			</h1>
+			<form action="/blogs" method="get">
+				<div class="row">
+					<div class="col-lg-3">
+						<input class="search-input mb-4" name="search" type="text" placeholder="What are you looking for?" />
+					</div>
+					<div class="col-lg-3">
+						<button type="submit" class="btn btn-outline-dark sub_btn custom_btn btn-block">
+							Search
+						</button>
+					</div>
+				</div>
+			</form>
 			<div class="col" style="display: inline-flex">
+				
 				<div class="blogz">
 					<span><a href="/blogs/myBlogs"><img src="../../assets/images/My_blogs.png" alt="blogs"
 								style="height: 70px; width: 70px" /></a></span>
 					<span><a href="/blogs/add"><img src="../../assets/images/Add_blogs.png" alt="add"
 								style="height: 70px; width: 70px" /></a></span>
 				</div>
+				
 			</div>
 		</div>
 		<div class="all" style="display: block">

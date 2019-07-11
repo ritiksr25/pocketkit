@@ -2,25 +2,20 @@ const axios = require('axios');
 
 const urlPart = process.env.MOVIES_API_URL_PART;
 
-module.exports.index = (req, res) => {
-	res.render('movies/index', { data: false });
-};
-
-module.exports.search = async (req, res) => {
-	let query = req.body.query;
-	try {
-		let response = await axios.get(`${urlPart}s=${query}`);
-		if (!response.data.Search) {
-			res.render('movies/index', { data: true, isMovies: false });
-		} else {
+module.exports.index = async (req, res) => {
+	let query = req.query.search;
+	if (query) {
+		try {
+			let response = await axios.get(`${urlPart}s=${query}`);
 			res.render('movies/index', {
 				data: true,
-				isMovies: true,
 				movies: response.data.Search
 			});
+		} catch (err) {
+			console.log(err);
 		}
-	} catch (err) {
-		console.log(err);
+	} else {
+		res.render('movies/index', { data: false });
 	}
 };
 

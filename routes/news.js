@@ -4,12 +4,10 @@ const router = express.Router();
 const { isLoggedIn } = require('../config/authcheck');
 
 //load controllers
-const { index, search } = require('../controllers/news_controller');
+const { index } = require('../controllers/news_controller');
 
 //news home - default articles
 router.get('/', isLoggedIn, index);
-//search news
-router.post('/', isLoggedIn, search);
 
 //export router
 module.exports = router;

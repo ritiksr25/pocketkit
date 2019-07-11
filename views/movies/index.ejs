@@ -7,10 +7,10 @@
 		<h1 class="title main__title pt-4" style="font-size: 20px; margin-bottom: 30px">
 			Search Movies
 		</h1>
-		<form action="/movies" method="post">
+		<form action="/movies" method="get">
 			<div class="row">
 				<div class="col-lg-3">
-					<input class="search-input mb-4" name="query" type="text" placeholder="What are you looking for?" />
+					<input class="search-input mb-4" name="search" type="text" placeholder="What are you looking for?" />
 				</div>
 				<div class="col-lg-3">
 					<button type="submit" class="btn btn-outline-dark sub_btn custom_btn btn-block">
@@ -27,7 +27,7 @@
 					Movies: <% } %>
 				</h1>
 				<div class="row mt-4">
-					<% if(data) { if(isMovies == true){ movies.forEach(movie =>
+					<% if(data) { if(movies){ movies.forEach(movie =>
 					{ %>
 					<div class="col-lg-4">
 						<div class="card">
