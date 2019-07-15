@@ -1,6 +1,6 @@
 {
   "name": "pocketkit",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A multiutility application that allows users to view movies, news, upcoming and ongoing contests, books and also a post sharing platform where users can post,view others post and like and comment as well.",
   "main": "index.js",
   "scripts": {

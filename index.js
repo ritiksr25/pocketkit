@@ -46,6 +46,7 @@ app.use('/news', require('./routes/news'));
 app.use('/books', require('./routes/books'));
 app.use('/contests', require('./routes/contests'));
 app.use('/blogs', require('./routes/blogs'));
+app.use('/admin', require('./routes/admin'));
 
 // under dev
 
