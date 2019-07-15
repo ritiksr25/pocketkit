@@ -29,7 +29,7 @@
                     <p class="blockquote-footer text-right">
                         <%=blog.by.name%>
                     </p>
-                    <span class="blockquote-footer text-right"><i class="far fa-calendar-alt"></i> <%=blog.createdAt%>
+                    <span class="blockquote-footer text-right"><i class="far fa-calendar-alt"></i> <%=blog.createdAt.toString().slice(0,33)%>
                     </span>
                     <a class="btn btn-outline-dark" href="/blogs/like/<%=blog._id%>"><span class="fas fa-heart">
                             <%=blog.likes.length%></span></a>
@@ -62,7 +62,7 @@
                             <div class="col-lg-9">
                                 <h4><%=comment.name%></h4>
                                 <div style="color: #444444; font-size: 15px;">
-                                    <span><%=comment.date%> </span>
+                                    <span><%=comment.date.toString().slice(0,33)%> </span>
                                     <p>
                                         <h6 class="title"><%=comment.comment%></h6>
                                     </p>
