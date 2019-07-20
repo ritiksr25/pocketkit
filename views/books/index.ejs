@@ -37,7 +37,8 @@
 					%>
 					<div class="col-lg-4">
 						<div class="card">
-							<img class="card-img-top" src="<%=book.volumeInfo.imageLinks.thumbnail%>" />
+							<img class="card-img-top" <%
+							if(book.volumeInfo.imageLinks == undefined ) { %> src="../assets/images/books.jpg" <% } else { %> src=" <%=book.volumeInfo.imageLinks.thumbnail%>" <% } %>>
 							<h4 class="card-title mt-2">
 								<%=book.volumeInfo.title%>
 							</h4>
