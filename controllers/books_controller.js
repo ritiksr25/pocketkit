@@ -46,9 +46,7 @@ module.exports.add = async (req, res) => {
 			bookid: req.params.id
 		});
 		if (book) {
-			res.render('books/library', {
-				msg: 'Book is already in your library!!'
-			});
+			res.redirect('/books/library');
 		} else {
 			await Library.create(newBook);
 			res.redirect('/books/library');
