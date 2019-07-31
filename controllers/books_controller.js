@@ -39,7 +39,7 @@ module.exports.add = async (req, res) => {
 			author: response.data.volumeInfo.authors[0],
 			publisher: response.data.volumeInfo.publisher,
 			publishedDate: response.data.volumeInfo.publishedDate,
-			thumbnail: response.data.volumeInfo.imageLinks.thumbnail
+			thumbnail: response.data.volumeInfo.imageLinks.thumbnail || '../assets/images/books.jpg'
 		};
 		let book = await Library.findOne({
 			user: req.user.id,

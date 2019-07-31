@@ -14,7 +14,9 @@ const config = cloudinary.config({
 //define storage
 const storage = cloudinaryStorage({
 	cloudinary: cloudinary,
-	folder: process.env.CLOUDINARY_RESOURCE_FOLDER,
+	folder: (req, file, next) => {
+		next(`${process.env.CLOUDINARY_RESOURCE_FOLDER}/${req.baseUrl.split('/')[1]}`);
+	  },
 	allowedFormat: ['jpg', 'jpeg', 'png', 'gif'],
 	transformation: [{ width: 300, height: 300, crop: 'limit' }]
 });

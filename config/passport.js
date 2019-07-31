@@ -16,22 +16,26 @@ module.exports = passport => {
 				callbackURL: '/users/login/callback',
 				proxy: true
 			},
-			(accessToken, refreshToken, profile, done) => {
+			async (accessToken, refreshToken, profile, done) => {
 				const newUser = {
 					googleID: profile.id,
 					name: profile.displayName,
 					email: profile.emails[0].value,
 					img: profile.photos[0].value
 				};
-				User.findOne({ googleID: newUser.googleID }).then(user => {
+				try {
+					let user = await User.findOne({
+						googleID: newUser.googleID
+					});
 					if (user) {
 						return done(null, user);
 					} else {
-						User.create(newUser).then(user => {
-							return done(null, user);
-						});
+						user = await User.create(newUser);
+						return done(null, user);
 					}
-				});
+				} catch (err) {
+					console.log(err);
+				}
 			}
 		)
 	);

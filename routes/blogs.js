@@ -22,7 +22,7 @@ const {
 const { upload } = require('../config/imgupload');
 
 //index route -view all user blogs
-router.get('/', isLoggedIn, index);
+router.get('/', index);
 //view single blog
 router.get('/view/:id', isLoggedIn, single);
 //user blogs

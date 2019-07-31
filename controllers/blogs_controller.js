@@ -17,10 +17,12 @@ module.exports.index = async (req, res) => {
 				.sort({ createdAt: 'desc' })
 				.populate('by');
 		} else {
-			blogs = await Blog.find({ published: true })
+			blogs = await Blog.find()
 				.sort({ createdAt: 'desc' })
-				.populate('by');
+				.populate('by')
+				.limit(3);
 		}
+		// res.json(blogs);
 		res.render('blogs/index', { blogs, data: 'All ' });
 	} catch (err) {
 		console.log(err);
@@ -87,6 +89,7 @@ module.exports.addProcess = async (req, res) => {
 		img.id = req.file.public_id;
 		img.url = req.file.url;
 	}
+	console.log(req.file);
 	let newBlog = {
 		title,
 		description,
