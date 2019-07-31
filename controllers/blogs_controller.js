@@ -17,10 +17,9 @@ module.exports.index = async (req, res) => {
 				.sort({ createdAt: 'desc' })
 				.populate('by');
 		} else {
-			blogs = await Blog.find()
+			blogs = await Blog.find({ published: true })
 				.sort({ createdAt: 'desc' })
 				.populate('by')
-				.limit(3);
 		}
 		// res.json(blogs);
 		res.render('blogs/index', { blogs, data: 'All ' });
